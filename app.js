@@ -36,6 +36,11 @@ app.use(function(req, res, next) {
 
 // error handlers
 
+app.set('view engine', 'ejs');
+
+// routes
+require('./routes/index')(app);
+
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
