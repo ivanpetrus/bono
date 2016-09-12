@@ -1,6 +1,7 @@
 /**
  * Created by ivanpetrus on 9/11/16.
  */
+
 var Botkit = require('botkit');
 
 var controller = Botkit.slackbot({
