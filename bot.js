@@ -15,14 +15,8 @@ controller.spawn({
 }).startRTM()
 
 // give the bot something to listen for.
-controller.hears(['hello','hi','^/set=\w+@w+.w+:\d+,d+$'],['direct_message','direct_mention','mention'],function(bot,message) {
+controller.hears(['hello','hi'],['direct_message','direct_mention','mention'],function(bot,message) {
 
-controller.storage.users.all(function (err, data) {
-
-    if (err!=null){
-
-    }
-});
    //controller.storage.channels.all();
     var reply_with_attachments = {
 
@@ -65,8 +59,6 @@ controller.storage.users.all(function (err, data) {
         'icon_url': 'http://lorempixel.com/48/48'
     }
 
-   bot.startConversation()
-
-
+   bot.reply(message,reply_with_attachments,null);
 
 });
