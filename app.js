@@ -4,9 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var dotenv = require('dotenv');
+var dotenv= require('dotenv');
 var routes = require('./routes/index');
-
 dotenv.load();
 
 var port = process.env.PORT || 3100;
@@ -36,11 +35,6 @@ app.use(function(req, res, next) {
 
 // error handlers
 
-app.set('view engine', 'ejs');
-
-// routes
-require('./routes/index')(app);
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -63,8 +57,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(port, function () {
-  console.log('bot listening on port ' + port);
+app.listen(app.get('port'), function () {
+  console.log('bot listening on port ' + app.get('port'));
 
 });
 
