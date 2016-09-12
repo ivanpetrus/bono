@@ -56,5 +56,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
+var cluster = require("./cluster");
+cluster.run();
 module.exports = app;
