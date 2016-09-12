@@ -2,7 +2,7 @@
  * Created by ivanpetrus on 9/5/16.
  */
 var mongoose = require("mongoose");
-var url= 'mongodb://localhost:27017/bono';
+var url= 'mongodb://guest:guest@ds021026.mlab.com:21026/bono';   //'mongodb://localhost:27017/bono';
 
 mongoose.Promise = global.Promise;
 
