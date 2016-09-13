@@ -28,10 +28,11 @@ module.exports = function(app) {
     }
   })
 
-  app.post('reminder',function (req, resp) {
-
+  app.post('/reminder',function (req, resp) {
+    console.log(req.body);
+    resp.sendStatus(200);
   })
-  app.post('interactive',function (req, resp) {
+  app.post('/interactive',function (req, resp) {
 
   })
 
