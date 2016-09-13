@@ -67,6 +67,29 @@ var team = new mongoose.Schema({
     }
 });
 
+var team_config = new mongoose.Schema({
+    id: String,
+    bot: {
+        token: String,
+        user_id: String,
+        createdBy: String
+    },
+    createdBy: String,
+    url: String,
+    name: String
+});
+
+var team = new mongoose.Schema({
+    id: {
+        type: String,
+        required:true,
+        unique:true
+    },
+    token: String,
+    user: String,
+    url: String
+})
+
 //export functions
 module.exports = {
 
@@ -135,6 +158,45 @@ module.exports = {
                 });
                 client.save();
             }
+        });
+    },
+
+    AddTeamConfig: function (t_config) {
+        var t_c = mongoose.model("team_config", team_config);
+        t_c.findOne({id: t_config.id}, function (err, obj) {
+            if (err != null) {
+                console.error(err);
+            }
+            else if (obj != null) {
+
+            } else {
+                var ntc = new t_c({
+                    id: t_config.id,
+                    bot: {
+                        token: t_config.token,
+                        user_id: t_config.user_id,
+                        createdBy: t_config.createdBy
+                    },
+                    createdBy: t_config.createdBy,
+                    url: t_config.url,
+                    name: t_config.name
+                });
+                ntc.save(function (err) {
+                    if (err != null) {
+                        console.error(err);
+                    }
+                })
+            }
+        })
+    },
+    GetTeamConfigs: function (callback) {
+        var t_c = mongoose.model("team_config", team_config);
+        t_c.find({}, function (err, arr) {
+            if (err != null) {
+                console.error(err);
+            }
+            else if (callback != null)
+                callback(arr);
         });
     }
 };
