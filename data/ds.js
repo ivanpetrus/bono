@@ -65,8 +65,8 @@ var reminder_schema = new mongoose.Schema({
 var team_schema = new mongoose.Schema({
     id: {
         type: String,
-        required:true,
-        unique:true
+        required: true,
+        unique: true
     },
     token: String,
     user: String,
@@ -78,16 +78,22 @@ module.exports = {
 
     add_team: function (team, callback) {
         var tm = mongoose.model("team", team_schema);
-        tm.findOne({id:team.id},function (err, obj) {
-            if (err!=null){console.error(err);}
-            else if (obj!=null){
+        tm.findOne({id: team.id}, function (err, obj) {
+            if (err != null) {
+                console.error(err);
+            }
+            else if (obj != null) {
                 obj.update({
                     token: team.token,
                     user: team.user,
                     url: team.url
-                },function (err, obj) {
-                    if (err!=null){console.error(err);}
-                    else if (callback!=null){callback(obj);}
+                }, function (err, obj) {
+                    if (err != null) {
+                        console.error(err);
+                    }
+                    else if (callback != null) {
+                        callback(obj);
+                    }
                 });
             }
             else {
@@ -97,53 +103,85 @@ module.exports = {
                     user: team.user,
                     url: team.url
                 });
-                t.save({new: true},function (err,obj) {
-                    if (err!=null){console.error(err);}
-                    else if (callback!=null){callback(obj);}
+                t.save({new: true}, function (err, obj) {
+                    if (err != null) {
+                        console.error(err);
+                    }
+                    else if (callback != null) {
+                        callback(obj);
+                    }
                 });
             }
         });
     },
     add_client: function (client, callback) {
-        var cm = mongoose.model("client",client_schema);
-        cm.findOne({email:client.email},function (err, obj) {
-            if (err!=null){console.error(err);}
-            else if (obj!=null){
+        var cm = mongoose.model("client", client_schema);
+        cm.findOne({email: client.email}, function (err, obj) {
+            if (err != null) {
+                console.error(err);
+            }
+            else if (obj != null) {
                 obj.update({
                     reminders: client.reminders
-                },function (err, obj) {
-                    if (err!=null){console.error(err);}
-                    else if (callback!=null){callback(obj);}
+                }, function (err, obj) {
+                    if (err != null) {
+                        console.error(err);
+                    }
+                    else if (callback != null) {
+                        callback(obj);
+                    }
                 })
-            }else{
+            } else {
                 var c = new cm({
                     email: client.email,
                     reminders: client.reminders
                 });
-                c.save({new:true},function (err, obj) {
-                    if (err!=null){console.error(err);}
-                    else if (callback!=null){callback(obj);}
+                c.save({new: true}, function (err, obj) {
+                    if (err != null) {
+                        console.error(err);
+                    }
+                    else if (callback != null) {
+                        callback(obj);
+                    }
                 })
             }
         });
     },
-    add_reminder: function (reminder, callback) {
-        var rm = mongoose.model("reminder__"+reminder.team, reminder_schema);
-
-        rm.findOne({channel: reminder.channel},function (err, obj) {
+    add_reminder_to_client_list: function (email, reminder_name) {
+        var cm = mongoose.model("client", client_schema);
+        cm.findOne({email: email}, function (err, obj) {
             if (err!=null){console.error(err);}
             else if (obj!=null){
+                if (obj.reminders.indexOf(reminder_name) ==-1){
+                    obj.reminders.push(reminder_name);
+                    obj.update();
+                }
+            }
+        });
+    },
+    add_reminder: function (reminder, callback) {
+        var rm = mongoose.model("reminder__" + reminder.team, reminder_schema);
+
+        rm.findOne({channel: reminder.channel}, function (err, obj) {
+            if (err != null) {
+                console.error(err);
+            }
+            else if (obj != null) {
                 obj.update({
                     status: reminder.status,
                     name: reminder.name,
                     time: reminder.time,
                     type: reminder.type,
                     mdate: Date.now()
-                },function (err, obj) {
-                    if (err!=null){console.error(err);}
-                    else if (callback!=null){callback(obj);}
+                }, function (err, obj) {
+                    if (err != null) {
+                        console.error(err);
+                    }
+                    else if (callback != null) {
+                        callback(obj);
+                    }
                 });
-            }else{
+            } else {
                 var r = new rm({
                     channel: reminder.channel,
                     status: reminder.status,
@@ -152,20 +190,28 @@ module.exports = {
                     type: reminder.type,
                     mdate: Date.now()
                 });
-                r.save({new:true},function (err, obj) {
-                    if (err!=null){console.error(err);}
-                    else if (callback!=null){
+                r.save({new: true}, function (err, obj) {
+                    if (err != null) {
+                        console.error(err);
+                    }
+                    else if (callback != null) {
                         callback(obj);
                     }
                 })
             }
         });
-    },
+    }
+
+    ,
     get_all_teams: function (callback) {
-        var tm = mongoose.model("team",team_schema);
-        tm.find({},function (err, list) {
-            if (err!=null){console.error(err);}
-            else if (callback!=null){callback(list);}
+        var tm = mongoose.model("team", team_schema);
+        tm.find({}, function (err, list) {
+            if (err != null) {
+                console.error(err);
+            }
+            else if (callback != null) {
+                callback(list);
+            }
         })
     }
 

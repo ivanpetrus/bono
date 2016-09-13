@@ -53,4 +53,10 @@ exports.get_user_information = function(team_id, user_id){
        return rtm.dataStore.getUserById(user_id);
     }
 }
+exports.get_channel= function(team_id, user_name){
+    var rtm = _rtms[team_id];
+    if (rtm!=null){
+        return rtm.dataStore.getDMByName(user_name);
+    }
+}
 
