@@ -38,7 +38,7 @@ module.exports = function(app) {
         var user_id = req.body.user_id;
         var team_id = req.body.team_id;
 
-        var mname = text.match(/@\w+/g).replace('@','');
+        var mname = text.match(/@\w+/g)[0].replace('@','');
         var tstring = text.split('=')[1].match(/\d+/g);
         var user = slacko.get_user_information(team_id,user_id);
         var tmember = slacko.get_user_information(team_id, mname);
@@ -47,7 +47,7 @@ module.exports = function(app) {
           ds.add_reminder({
             channel: channel.id,
             name:tmember.name,
-            time: parseInt(tmember[0].toString()+tmember[1].toString())
+            time: parseInt(tstring[0].toString()+tstring[1].toString())
           },function (obj) {
             if (obj!=null){
               db.add_reminder_to_client_list(user.profile.email,team_id);
