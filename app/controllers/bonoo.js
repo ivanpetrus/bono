@@ -29,7 +29,7 @@ exports.connect = function (team) {
         });
 
         rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
-
+                rtm.send(message);
         });
 
         rtm.on(RTM_EVENTS.BOT_ADDED,function () {
