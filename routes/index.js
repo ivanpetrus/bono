@@ -29,6 +29,7 @@ module.exports = function(app) {
   })
 
   app.post('/reminder',function (req, resp) {
+    console.log(req.body);
     if (req.body !=null){
       var token = req.body.token;
       var command = req.body.command;
