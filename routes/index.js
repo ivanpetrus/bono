@@ -38,7 +38,7 @@ module.exports = function(app) {
         var user_id = req.body.user_id;
         var team_id = req.body.team_id;
 
-        var mname = text.match(/@\w+/g)replace('@','');
+        var mname = text.match(/@\w+/g).replace('@','');
         var tstring = text.split('=')[1].match(/\d+/g);
         var user = slacko.get_user_information(team_id,user_id);
         var tmember = slacko.get_user_information(team_id, mname);
