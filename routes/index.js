@@ -55,8 +55,8 @@ module.exports = function(app) {
             }
           });
         }
-        console.log(user);
-        console.log(text);
+        //console.log(user);
+        //console.log(text);
       }
     }
     resp.sendStatus(200);
