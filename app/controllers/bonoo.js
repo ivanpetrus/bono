@@ -6,9 +6,9 @@ var CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS;
 var RTM_EVENTS = require('@slack/client').RTM_EVENTS;
 var MemoryDataStore = require('@slack/client').MemoryDataStore;
 
-var _rtms ={};
+var _rtms = {};
 
-var track_rtm = function(rtm,team_id){
+var track_rtm = function (rtm, team_id) {
     _rtms[team_id] = rtm;
 }
 
@@ -31,32 +31,62 @@ exports.connect = function (team) {
         });
 
         rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
-                rtm.send(message);
+            rtm.send(message);
         });
 
-        rtm.on(RTM_EVENTS.BOT_ADDED,function () {
+        rtm.on(RTM_EVENTS.BOT_ADDED, function () {
             var user = rtm.dataStore.getUserById(team.user);
             var channel = rtm.dataStore.getDMByName(user.name);
-            rtm.sendMessage("Hello "+ user.name +"! I am bono, and I will help you to manage team", channel.id, null);
+            rtm.sendMessage("Hello " + user.name + "! I am bono, and I will help you to manage team", channel.id, null);
             ds.add_client({
                 email: user.profile.email,
                 reminders: []
-            },function (obj) {
+            }, function (obj) {
 
             })
         })
     }
 }
-exports.get_user_information = function(team_id, user_id){
+exports.get_user_information = function (team_id, user_id) {
     var rtm = _rtms[team_id];
-    if (rtm!=null){
-       return rtm.dataStore.getUserById(user_id);
+    if (rtm != null) {
+        return rtm.dataStore.getUserById(user_id);
     }
 }
-exports.get_channel= function(team_id, user_name){
+exports.get_user_information_by_name = function (team_id, user_name) {
     var rtm = _rtms[team_id];
-    if (rtm!=null){
-        return rtm.dataStore.getDMByName(user_name);
+    if (rtm != null) {
+        return rtm.dataStore.getUserByName(user_name);
+    }
+}
+exports.get_channel = function (team_id, user_name) {
+    var rtm = _rtms[team_id];
+    if (rtm != null) {
+        var user = rtm.dataStore.getUserByName(user_name);
+        return rtm.dataStore.getDMByName(user.name);
+    }
+}
+
+exports.send_reminder_sucess_message = function (is_added, client_name, user_name, team_id) {
+    var rtm = _rtms[team_id];
+    if (rtm != null) {
+        var channel = rtm.dataStore.getDMByName(rtm.dataStore.getUserByName(client_name))
+        if (is_added) {
+            rtm.sendMessage(client_name + "! I added reporting time for user " + user_name, channel.id);
+        }
+        else {
+            rtm.sendMessage(client_name + "! I updated reporting time for user " + user_name, channel.id);
+
+        }
+    }
+}
+
+exports.send_error_message = function (team_id, user_name) {
+    var rtm = _rtms[team_id];
+    if (rtm != null) {
+        var channel = rtm.dataStore.getDMByName(rtm.dataStore.getUserByName(user_name))
+
+        rtm.sendMessage("Ooops something where wrong, I will send report to my creators", channel.id);
     }
 }
 

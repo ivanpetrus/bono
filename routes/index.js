@@ -30,7 +30,7 @@ module.exports = function(app) {
 
   app.post('/reminder',function (req, resp) {
     console.log(req.body);
-    if (req.body !=null){
+    //if (req.body !=null){
       var token = req.body.token;
       var command = req.body.command;
       if (token == SLACK_VER_TOKEN && command =="/reminder") {
@@ -42,23 +42,29 @@ module.exports = function(app) {
         var mname = text.match(/@\w+/g)[0].replace('@','');
         var tstring = text.split('=')[1].match(/\d+/g);
         var user = slacko.get_user_information(team_id,user_id);
-        var tmember = slacko.get_user_information(team_id, mname);
+        var tmember = slacko.get_user_information_by_name(team_id, mname);
         if (user !=null & tmember!=null){
            var channel = slacko.get_channel(team_id,tmember.name);
           ds.add_reminder({
+            team: team_id,
             channel: channel.id,
             name:tmember.name,
             time: parseInt(tstring[0].toString()+tstring[1].toString())
           },function (obj) {
             if (obj!=null){
-              db.add_reminder_to_client_list(user.profile.email,team_id);
+              ds.add_reminder_to_client_list(user.profile.email,team_id,function (err, obj) {
+                if (err!=null){
+                  slacko.send_error_message(team_id,user.name);
+                }
+                else {
+                  slacko.send_reminder_sucess_message(true,user.name,tmember.name,team_id);
+                }
+              });
             }
           });
         }
-        //console.log(user);
-        //console.log(text);
       }
-    }
+    //}
     resp.sendStatus(200);
   })
   app.post('/interactive',function (req, resp) {

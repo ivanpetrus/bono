@@ -147,14 +147,14 @@ module.exports = {
             }
         });
     },
-    add_reminder_to_client_list: function (email, reminder_name) {
+    add_reminder_to_client_list: function (email, reminder_name, callback) {
         var cm = mongoose.model("client", client_schema);
         cm.findOne({email: email}, function (err, obj) {
             if (err!=null){console.error(err);}
             else if (obj!=null){
                 if (obj.reminders.indexOf(reminder_name) ==-1){
                     obj.reminders.push(reminder_name);
-                    obj.update();
+                    obj.save(callback);
                 }
             }
         });
