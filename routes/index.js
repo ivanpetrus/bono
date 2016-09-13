@@ -1,6 +1,6 @@
 var Request = require('request')
 var ds = require('../data/ds');
-
+var SLACK_VER_TOKEN="QC1xodgjZRUwlySDLnIxCm6F"
 /* GET home page. */
 
 module.exports = function(app) {
@@ -30,6 +30,18 @@ module.exports = function(app) {
 
   app.post('/reminder',function (req, resp) {
     console.log(req.body);
+    if (req.body !=null){
+      var token = req.body.token;
+      if (token == SLACK_VER_TOKEN) {
+        var command = req.body.command;
+        var text = req.body.text;
+        var user = req.body.user_id;
+        var team = req.body.team_id;
+
+        console.log(command);
+        console.log(text);
+      }
+    }
     resp.sendStatus(200);
   })
   app.post('/interactive',function (req, resp) {
