@@ -1,6 +1,11 @@
 /**
  * Created by ivanpetrus on 9/13/16.
  */
+var RtmClient = require('@slack/client').RtmClient;
+var CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS;
+var RTM_EVENTS = require('@slack/client').RTM_EVENTS;
+var MemoryDataStore = require('@slack/client').MemoryDataStore;
+
 var _rtms ={};
 
 var track_rtm = function(rtm,team_id){
@@ -8,10 +13,7 @@ var track_rtm = function(rtm,team_id){
 }
 
 exports.connect = function (team) {
-    var RtmClient = require('@slack/client').RtmClient;
-    var CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS;
-    var RTM_EVENTS = require('@slack/client').RTM_EVENTS;
-    var MemoryDataStore = require('@slack/client').MemoryDataStore;
+
     var ds = require('../../data/ds');
 
     if (!_rtms[team.id]) {
@@ -43,6 +45,12 @@ exports.connect = function (team) {
 
             })
         })
+    }
+}
+exports.get_user_information = function(team_id, user_id){
+    var rtm = _rtms[team_id];
+    if (rtm!=null){
+       return rtm.dataStore.getUserById(user_id);
     }
 }
 

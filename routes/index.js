@@ -29,16 +29,16 @@ module.exports = function(app) {
   })
 
   app.post('/reminder',function (req, resp) {
-    console.log(req.body);
     if (req.body !=null){
       var token = req.body.token;
-      if (token == SLACK_VER_TOKEN) {
-        var command = req.body.command;
-        var text = req.body.text;
-        var user = req.body.user_id;
-        var team = req.body.team_id;
+      var command = req.body.command;
+      if (token == SLACK_VER_TOKEN && command =="/reminder") {
 
-        console.log(command);
+        var text = req.body.text;
+        var user_id = req.body.user_id;
+        var team_id = req.body.team_id;
+        var user = slacko.get_user_information(team_id,user_id);
+        console.log(user);
         console.log(text);
       }
     }
