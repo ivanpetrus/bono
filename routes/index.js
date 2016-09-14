@@ -29,7 +29,7 @@ module.exports = function (app) {
     })
 
     app.post('/reminder', function (req, resp) {
-        //console.log(req.body);
+
         if (req.body != null) {
             var token = req.body.token;
             var command = req.body.command;
@@ -38,8 +38,8 @@ module.exports = function (app) {
                 var text = req.body.text;
                 var user_id = req.body.user_id;
                 var team_id = req.body.team_id;
-                //console.log(req.body);
-                var mname = text.match(/@\w+/g)[0].replace('@', '');
+
+                var mname = text.match(/@\w+/g)[0].replace('@','');
                 var tstring = text.split('=')[1].match(/\d+/g);
                 var user = slacko.get_user_information(team_id, user_id);
                 var tmember = slacko.get_user_information_by_name(team_id, mname);
