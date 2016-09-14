@@ -54,6 +54,7 @@ module.exports = function(app) {
             if (obj!=null){
               ds.add_reminder_to_client_list(user.profile.email,team_id,function (err, obj) {
                 if (err!=null){
+                  console.error(err);
                   slacko.send_error_message(team_id,user.name);
                 }
                 else {
@@ -67,6 +68,7 @@ module.exports = function(app) {
     //}
     resp.sendStatus(200);
   })
+
   app.post('/interactive',function (req, resp) {
 
   })
