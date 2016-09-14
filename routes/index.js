@@ -45,27 +45,33 @@ module.exports = function (app) {
                 var tmember = slacko.get_user_information_by_name(team_id, mname);
 
                 if (user != null & tmember != null) {
-                    var channel = slacko.get_channel(team_id, tmember.name);
-                    ds.add_reminder({
-                        team: team_id,
-                        channel: channel.id,
-                        name: tmember.name,
-                        time: parseInt(tstring[0].toString() + tstring[1].toString())
-                    }, function (obj) {
+                    try {
+                        var channel = slacko.get_channel(team_id, tmember.name);
+                        ds.add_reminder({
+                            team: team_id,
+                            channel: channel.id,
+                            name: tmember.name,
+                            time: parseInt(tstring[0].toString() + tstring[1].toString())
+                        }, function (obj) {
 
-                        if (obj != null) {
-                            ds.add_reminder_to_client_list(user.profile.email, team_id, function (err, obj) {
-                                if (err != null) {
-                                    console.error(err);
-                                    slacko.send_error_message(team_id, user.name);
-                                }
-                                else {
-                                    console.log("sending sucess message to " + user.name + " in team: " + team_id);
-                                    slacko.send_reminder_sucess_message( user.name, tmember.name, team_id);
-                                }
-                            });
-                        }
-                    });
+                            if (obj != null) {
+                                ds.add_reminder_to_client_list(user.profile.email, team_id, function (err, obj) {
+                                    if (err != null) {
+                                        console.error(err);
+                                        slacko.send_error_message(team_id, user.name);
+                                    }
+                                    else {
+                                        console.log("sending sucess message to " + user.name + " in team: " + team_id);
+                                        slacko.send_reminder_sucess_message(user.name, tmember.name, team_id);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                    catch (err){
+                        console.error(err);
+                        slacko.send_error_message(team_id,user_id.name);
+                    }
                 }
               slacko.send_message("I will work on it, also i wil let you know once it will be done",user.name,team_id);
             }
