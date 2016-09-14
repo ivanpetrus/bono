@@ -38,7 +38,7 @@ module.exports = function(app) {
         var text = req.body.text;
         var user_id = req.body.user_id;
         var team_id = req.body.team_id;
-        console.log(req.body);
+        //console.log(req.body);
         var mname = text.match(/@\w+/g)[0].replace('@','');
         var tstring = text.split('=')[1].match(/\d+/g);
         var user = slacko.get_user_information(team_id,user_id);
@@ -51,6 +51,7 @@ module.exports = function(app) {
             name:tmember.name,
             time: parseInt(tstring[0].toString()+tstring[1].toString())
           },function (obj) {
+            console.log("obj:" +obj);
             if (obj!=null){
               ds.add_reminder_to_client_list(user.profile.email,team_id,function (err, obj) {
                 if (err!=null){
@@ -59,7 +60,7 @@ module.exports = function(app) {
                 }
                 else {
                   console.log("sending sucess message to "+ user.name+ " in team: "+team_id);
-                  slacko.send_reminder_sucess_message(true,user.name,tmember.name,team_id);
+                  slacko.send_reminder_sucess_message(true, user.name, tmember.name, team_id);
                 }
               });
             }

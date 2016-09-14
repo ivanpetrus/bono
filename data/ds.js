@@ -154,8 +154,8 @@ module.exports = {
             else if (obj!=null){
                 if (obj.reminders.indexOf(reminder_name) ==-1){
                     obj.reminders.push(reminder_name);
-                    obj.save(function (err, obj) {
-                        if (callback!=null){
+                    obj.save({new:true},function (err, obj) {
+                        if (callback!= null){
                             callback(err,obj);
                         }
                     });
