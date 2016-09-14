@@ -45,6 +45,7 @@ module.exports = function (app) {
                 var tmember = slacko.get_user_information_by_name(team_id, mname);
                 if (user != null & tmember != null) {
                     var channel = slacko.get_channel(team_id, tmember.name);
+                    console.log("channel: "+ channel);
                     ds.add_reminder({
                         team: team_id,
                         channel: channel.id,
