@@ -67,6 +67,8 @@ module.exports = function(app) {
 
             }
           });
+          slacko.send_reminder_sucess_message(true, user.name, tmember.name, team_id);
+
         }
       }
       resp.sendStatus(200);
