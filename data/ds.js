@@ -160,14 +160,10 @@ module.exports = {
                 if (obj.reminders.indexOf(reminder_name) ==-1){
                     obj.reminders.push(reminder_name);
                     obj.mdate = Date.now();
-                    obj.save(function (err, obj) {
-                        if (callback!= null){
-                            callback(err,obj);
-                        }
-                    });
+                    obj.save();
                 }
             }
-            else  if (callback!= null){
+            if (callback!= null){
                 callback(err,obj);
             }
         });
