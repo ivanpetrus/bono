@@ -74,7 +74,7 @@ exports.send_reminder_sucess_message = function (client_name, user_name, team_id
     var rtm = _rtms[team_id];
     if (rtm != null) {
         console.log("RTM:" + rtm);
-        var channel = rtm.dataStore.getDMByName(user_name);
+        var channel = exports.get_channel(team_id,user_name);
         console.log("channel: ", channel.id);
 
         rtm.sendMessage(client_name + "! I added reporting time for user " + user_name, channel.id);
@@ -87,7 +87,7 @@ exports.send_reminder_sucess_message = function (client_name, user_name, team_id
 exports.send_error_message = function (team_id, user_name) {
     var rtm = _rtms[team_id];
     if (rtm != null) {
-        var channel = rtm.dataStore.getDMByName(user_name)
+        var channel = exports.get_channel(team_id,user_name);// rtm.dataStore.getDMByName(user_name)
 
         rtm.sendMessage("Ooops something where wrong, I will send report to my creators", channel.id);
     }
@@ -96,7 +96,7 @@ exports.send_error_message = function (team_id, user_name) {
 exports.send_message = function (mesage, user_name, team_id) {
     var rtm = _rtms[team_id];
     if (rtm != null) {
-        var channel = rtm.dataStore.getDMByName(user_name)
+        var channel = exports.get_channel(team_id,user_name);
 
         rtm.sendMessage(user_name + ", " + message, channel.id);
     }
