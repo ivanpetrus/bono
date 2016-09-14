@@ -32,9 +32,9 @@ exports.connect = function (team) {
 
         rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
             rtm.send(message);
-           // team_id: 'T252CCFH6', channel_id: 'D2AQBDTQT',
-           // channel_name: 'directmessage',
-           // user_id: 'U252CCFLG',
+            // team_id: 'T252CCFH6', channel_id: 'D2AQBDTQT',
+            // channel_name: 'directmessage',
+            // user_id: 'U252CCFLG',
         });
 
         rtm.on(RTM_EVENTS.BOT_ADDED, function () {
@@ -70,19 +70,18 @@ exports.get_channel = function (team_id, user_name) {
     }
 }
 
-exports.send_reminder_sucess_message = function (is_added, client_name, user_name, team_id) {
+exports.send_reminder_sucess_message = function (client_name, user_name, team_id) {
     var rtm = _rtms[team_id];
     if (rtm != null) {
-        var channel = rtm.dataStore.getDMByName(user_name)
-        if (is_added) {
-            rtm.sendMessage(client_name + "! I added reporting time for user " + user_name, channel.id);
-        }
-        else {
-            rtm.sendMessage(client_name + "! I updated reporting time for user " + user_name, channel.id);
+        console.log("RTM:" + rtm);
+        var channel = rtm.dataStore.getDMByName(user_name);
+        console.log("channel: ", channel.id);
 
-        }
+        rtm.sendMessage(client_name + "! I added reporting time for user " + user_name, channel.id);
     }
-    else {console.error("could not find RTM for team: ",team_id);}
+    else {
+        console.error("could not find RTM for team: ", team_id);
+    }
 }
 
 exports.send_error_message = function (team_id, user_name) {
@@ -99,7 +98,7 @@ exports.send_message = function (mesage, user_name, team_id) {
     if (rtm != null) {
         var channel = rtm.dataStore.getDMByName(user_name)
 
-        rtm.sendMessage(user_name+ ", "+ message, channel.id);
+        rtm.sendMessage(user_name + ", " + message, channel.id);
     }
 }
 

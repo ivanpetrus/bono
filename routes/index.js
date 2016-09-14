@@ -43,6 +43,7 @@ module.exports = function (app) {
                 var tstring = text.split('=')[1].match(/\d+/g);
                 var user = slacko.get_user_information(team_id, user_id);
                 var tmember = slacko.get_user_information_by_name(team_id, mname);
+
                 if (user != null & tmember != null) {
                     var channel = slacko.get_channel(team_id, tmember.name);
                     ds.add_reminder({
@@ -60,7 +61,7 @@ module.exports = function (app) {
                                 }
                                 else {
                                     console.log("sending sucess message to " + user.name + " in team: " + team_id);
-                                    slacko.send_reminder_sucess_message(true, user.name, tmember.name, team_id);
+                                    slacko.send_reminder_sucess_message( user.name, tmember.name, team_id);
                                 }
                             });
                         }

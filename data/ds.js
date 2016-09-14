@@ -148,7 +148,7 @@ module.exports = {
         });
     },
     add_reminder_to_client_list: function (email, reminder_name, callback) {
-        console.log("performing client reminder updation for user" + email);
+        console.log("performing client reminder updation for user " + email);
         var cm = mongoose.model("client", client_schema);
         cm.findOne({email: email}, function (err, obj) {
             if (err!=null){console.error(err);}
