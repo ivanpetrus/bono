@@ -32,12 +32,10 @@ exports.connect = function (team) {
 
         rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
             rtm.send(message);
-            // team_id: 'T252CCFH6', channel_id: 'D2AQBDTQT',
-            // channel_name: 'directmessage',
-            // user_id: 'U252CCFLG',
         });
 
         rtm.on(RTM_EVENTS.BOT_ADDED, function () {
+            /*
             var user = rtm.dataStore.getUserById(team.user);
             var channel = rtm.dataStore.getDMByName(user.name);
             rtm.sendMessage("Hello " + user.name + "! I am bono, and I will help you to manage team", channel.id, null);
@@ -47,6 +45,23 @@ exports.connect = function (team) {
             }, function (obj) {
 
             })
+            rtm.send({
+                type:"message",
+                text:"interactive message",
+                channel:message.channel,
+                attachments:[
+                    {
+                        actions:[
+                            {
+                                name: "chess",
+                                text: "Chess",
+                                type: "button",
+                                value: "chess"
+                            }
+                        ]
+                    }
+                ]
+            })*/
         })
     }
 }
