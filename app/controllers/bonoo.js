@@ -97,7 +97,7 @@ exports.send_message = function (mesage, user_name, team_id) {
     var rtm = _rtms[team_id];
     if (rtm != null) {
         var channel = exports.get_channel(team_id,user_name);
-
+        console.log("active channel: " +channel.id);
         rtm.sendMessage(user_name + ", " + message, channel.id);
     }
 }

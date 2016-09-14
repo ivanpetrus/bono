@@ -45,6 +45,8 @@ module.exports = function (app) {
                 var tmember = slacko.get_user_information_by_name(team_id, mname);
 
                 if (user != null & tmember != null) {
+                    slacko.send_message("I will work on it, also i wil let you know once it will be done",user.name,team_id);
+
                     try {
                         var channel = slacko.get_channel(team_id, tmember.name);
                         ds.add_reminder({
@@ -74,7 +76,6 @@ module.exports = function (app) {
                         slacko.send_error_message(team_id,user_id.name);
                     }
                 }
-              slacko.send_message("I will work on it, also i wil let you know once it will be done",user.name,team_id);
             }
             resp.sendStatus(200);
 
