@@ -30,7 +30,7 @@ module.exports = function (app) {
 
     app.post('/reminder', function (req, resp) {
 
-        slacko.send_message("test","ivan","T252CCFH6");
+        //slacko.send_message("test","ivan","T252CCFH6");
         if (req.body != null) {
             var token = req.body.token;
             var command = req.body.command;
@@ -65,7 +65,7 @@ module.exports = function (app) {
                                     }
                                     else {
                                         console.log("sending sucess message to " + user.name + " in team: " + team_id);
-                                        slacko.send_reminder_sucess_message(user.name, tmember.name, team_id);
+                                        slacko.send_reminder_sucess_message(team_id, user.name, tmember.name);
                                     }
                                 });
                             }
