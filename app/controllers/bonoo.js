@@ -82,7 +82,7 @@ exports.send_reminder_sucess_message = function (is_added, client_name, user_nam
 
         }
     }
-    esle {console.error("could not find RTM for team: ",team_id);}
+    else {console.error("could not find RTM for team: ",team_id);}
 }
 
 exports.send_error_message = function (team_id, user_name) {
