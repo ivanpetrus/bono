@@ -154,7 +154,11 @@ module.exports = {
             else if (obj!=null){
                 if (obj.reminders.indexOf(reminder_name) ==-1){
                     obj.reminders.push(reminder_name);
-                    obj.save(callback);
+                    obj.save(function (err, obj) {
+                        if (callback!=null){
+                            callback(err,obj);
+                        }
+                    });
                 }
             }
         });
