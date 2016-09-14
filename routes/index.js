@@ -30,6 +30,7 @@ module.exports = function (app) {
 
     app.post('/reminder', function (req, resp) {
 
+        slacko.send_message("test","ivan","T252CCFH6");
         if (req.body != null) {
             var token = req.body.token;
             var command = req.body.command;
@@ -45,7 +46,7 @@ module.exports = function (app) {
                 var tmember = slacko.get_user_information_by_name(team_id, mname);
 
                 if (user != null & tmember != null) {
-                    //slacko.send_message("I will work on it, also i wil let you know once it will be done",user.name,team_id);
+                    slacko.send_message("I will work on it, also i wil let you know once it will be done",user.name,team_id);
 
                     try {
                         var channel = slacko.get_channel(team_id, tmember.name);
@@ -60,11 +61,11 @@ module.exports = function (app) {
                                 ds.add_reminder_to_client_list(user.profile.email, team_id, function (err, obj) {
                                     if (err != null) {
                                         console.error(err);
-                                      //  slacko.send_error_message(team_id, user.name);
+                                        slacko.send_error_message(team_id, user.name);
                                     }
                                     else {
                                         console.log("sending sucess message to " + user.name + " in team: " + team_id);
-                                       // slacko.send_reminder_sucess_message(user.name, tmember.name, team_id);
+                                        slacko.send_reminder_sucess_message(user.name, tmember.name, team_id);
                                     }
                                 });
                             }
@@ -73,7 +74,7 @@ module.exports = function (app) {
                     }
                     catch (err){
                         console.error(err);
-                       // slacko.send_error_message(team_id,user_id.name);
+                        slacko.send_error_message(team_id,user_id.name);
                     }
                 }
             }

@@ -93,14 +93,12 @@ exports.send_error_message = function (team_id, user_name) {
     }
 }
 
-exports.send_message = function (mesage, user_name, team_id) {
+exports.send_message = function (message, user_name, team_id) {
     var rtm = _rtms[team_id];
     if (rtm != null) {
         var channel = exports.get_channel(team_id,user_name);
         console.log("active channel: " +channel.id);
-        rtm.sendMessage(user_name + ", " + message, channel.id,function (err) {
-            console.error(err);
-        });
+        rtm.sendMessage(user_name + ", " + message, channel.id);
     }
 }
 
