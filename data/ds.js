@@ -161,10 +161,9 @@ module.exports = {
                         }
                     });
                 }
-                else  if (callback!= null){
-                    callback(err,obj);
-                }
-
+            }
+            else  if (callback!= null){
+                callback(err,obj);
             }
         });
     },

@@ -52,7 +52,7 @@ module.exports = function (app) {
                         name: tmember.name,
                         time: parseInt(tstring[0].toString() + tstring[1].toString())
                     }, function (obj) {
-                        console.log("reminder:" + obj);
+
                         if (obj != null) {
                             ds.add_reminder_to_client_list(user.profile.email, team_id, function (err, obj) {
                                 if (err != null) {
