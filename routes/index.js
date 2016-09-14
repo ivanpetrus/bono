@@ -66,7 +66,12 @@ module.exports = function (app) {
 
                         }
                     });
-                    slacko.send_reminder_sucess_message(true, user.name, tmember.name, team_id);
+                    try {
+                        slacko.send_reminder_sucess_message(true, user.name, tmember.name, team_id);
+                    }
+                    catch (err){
+                        console.error(err);
+                    }
 
                 }
                 else {
