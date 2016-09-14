@@ -30,6 +30,10 @@ var client_schema = new mongoose.Schema({
     reminders: {
         type: Array,
         default: []
+    },
+    mdate: {
+        type: Date,
+        default: Date.now()
     }
 });
 
@@ -155,6 +159,7 @@ module.exports = {
             else if (obj!=null){
                 if (obj.reminders.indexOf(reminder_name) ==-1){
                     obj.reminders.push(reminder_name);
+                    obj.mdate = Date.now();
                     obj.save(function (err, obj) {
                         if (callback!= null){
                             callback(err,obj);
