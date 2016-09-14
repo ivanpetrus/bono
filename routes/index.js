@@ -66,12 +66,10 @@ module.exports = function (app) {
                         }
                     });
                 }
-                else {
-                    console.error("user:" + user);
-                    console.error("member:" + tmember);
-                }
+              slacko.send_message("I will work on it, also i wil let you know once it will be done",user.name,team_id);
             }
             resp.sendStatus(200);
+
         }
     })
 

@@ -93,3 +93,12 @@ exports.send_error_message = function (team_id, user_name) {
     }
 }
 
+exports.send_message = function (mesage, user_name, team_id) {
+    var rtm = _rtms[team_id];
+    if (rtm != null) {
+        var channel = rtm.dataStore.getDMByName(user_name)
+
+        rtm.sendMessage(user_name+ ", "+ message, channel.id);
+    }
+}
+
