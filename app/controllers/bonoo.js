@@ -35,10 +35,9 @@ exports.connect = function (team) {
         });
 
         rtm.on(RTM_EVENTS.BOT_ADDED, function () {
-            /*
             var user = rtm.dataStore.getUserById(team.user);
             var channel = rtm.dataStore.getDMByName(user.name);
-            rtm.sendMessage("Hello " + user.name + "! I am bono, and I will help you to manage team", channel.id, null);
+            //rtm.sendMessage("Hello " + user.name + "! I am bono, and I will help you to manage team", channel.id, null);
             ds.add_client({
                 email: user.profile.email,
                 reminders: []
@@ -61,7 +60,7 @@ exports.connect = function (team) {
                         ]
                     }
                 ]
-            })*/
+            })
         })
     }
 }
