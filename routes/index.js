@@ -45,13 +45,13 @@ module.exports = function (app) {
                 var tmember = slacko.get_user_information_by_name(team_id, mname);
                 if (user != null & tmember != null) {
                     var channel = slacko.get_channel(team_id, tmember.name);
-                    console.log("channel: "+ channel);
                     ds.add_reminder({
                         team: team_id,
                         channel: channel.id,
                         name: tmember.name,
                         time: parseInt(tstring[0].toString() + tstring[1].toString())
                     }, function (obj) {
+                        console.log("reminder:" + obj);
                         if (obj != null) {
                             ds.add_reminder_to_client_list(user.profile.email, team_id, function (err, obj) {
                                 if (err != null) {
@@ -63,17 +63,8 @@ module.exports = function (app) {
                                     slacko.send_reminder_sucess_message(true, user.name, tmember.name, team_id);
                                 }
                             });
-                            slacko.send_reminder_sucess_message(true, user.name, tmember.name, team_id);
-
                         }
                     });
-                    try {
-                        slacko.send_reminder_sucess_message(true, user.name, tmember.name, team_id);
-                    }
-                    catch (err){
-                        console.error(err);
-                    }
-
                 }
                 else {
                     console.error("user:" + user);
