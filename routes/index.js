@@ -29,8 +29,8 @@ module.exports = function(app) {
   })
 
   app.post('/reminder',function (req, resp) {
-    console.log(req.body);
-    //if (req.body !=null){
+    //console.log(req.body);
+    if (req.body !=null){
       var token = req.body.token;
       var command = req.body.command;
       if (token == SLACK_VER_TOKEN && command =="/reminder") {
@@ -66,8 +66,8 @@ module.exports = function(app) {
           });
         }
       }
-    //}
-    resp.sendStatus(200);
+      resp.sendStatus(200);
+    }
   })
 
   app.post('/interactive',function (req, resp) {
