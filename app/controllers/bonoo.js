@@ -73,7 +73,7 @@ exports.get_channel = function (team_id, user_name) {
 exports.send_reminder_sucess_message = function (is_added, client_name, user_name, team_id) {
     var rtm = _rtms[team_id];
     if (rtm != null) {
-        var channel = rtm.dataStore.getDMByName(rtm.dataStore.getUserByName(client_name))
+        var channel = rtm.dataStore.getDMByName(user_name)
         if (is_added) {
             rtm.sendMessage(client_name + "! I added reporting time for user " + user_name, channel.id);
         }
@@ -87,7 +87,7 @@ exports.send_reminder_sucess_message = function (is_added, client_name, user_nam
 exports.send_error_message = function (team_id, user_name) {
     var rtm = _rtms[team_id];
     if (rtm != null) {
-        var channel = rtm.dataStore.getDMByName(rtm.dataStore.getUserByName(user_name))
+        var channel = rtm.dataStore.getDMByName(user_name)
 
         rtm.sendMessage("Ooops something where wrong, I will send report to my creators", channel.id);
     }
