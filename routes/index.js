@@ -58,6 +58,7 @@ module.exports = function(app) {
                   slacko.send_error_message(team_id,user.name);
                 }
                 else {
+                  console.log("sending sucess message to "+ user.name+ " in team: "+team_id,)
                   slacko.send_reminder_sucess_message(true,user.name,tmember.name,team_id);
                 }
               });

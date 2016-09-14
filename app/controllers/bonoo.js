@@ -32,6 +32,9 @@ exports.connect = function (team) {
 
         rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
             rtm.send(message);
+           // team_id: 'T252CCFH6', channel_id: 'D2AQBDTQT',
+           // channel_name: 'directmessage',
+           // user_id: 'U252CCFLG',
         });
 
         rtm.on(RTM_EVENTS.BOT_ADDED, function () {
