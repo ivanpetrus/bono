@@ -66,6 +66,7 @@ module.exports = function (app) {
                                     }
                                 });
                             }
+                            else {console.error("reminder object is null")}
                         });
                     }
                     catch (err){
