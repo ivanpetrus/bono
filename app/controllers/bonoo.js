@@ -14,10 +14,19 @@ var track_rtm = function (rtm, team_id) {
 var handle_message = function (message) {
 
     if (message.text.toLowerCase().indexOf("yes")!=-1){
-     ds.add_report(message.team,message.user.id,function (err, obj) {
+     ds.add_report(message.team,message.user,function (err, obj) {
          if (err){console.error(err);}
          else {
-
+            var rtm =_rtms[message.team];
+             if (rtm){
+                 var channel = rtm.dataStore.getDMByName(rtm.dataStore.getUserById(message.user).name);
+                 if (obj) {
+                     rtm.sendMessage("Thank you, i appreciate it", channel.id)
+                 }
+                 else {
+                     rtm.sendMessage("Yes I now, you already sent it to me today, I will remind about it tomorrow", channel.id)
+                 }
+             }
          }
      })
     }

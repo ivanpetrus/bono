@@ -55,13 +55,17 @@ var reminder_schema = new mongoose.Schema({
 });
 
 var report_schema = new mongoose.Schema({
+    id:{
+        type: mongoose.Schema.Types.ObjectId,
+        default: new mongoose.Types.ObjectId
+    },
     user:{
         type:String,
         required: true,
     },
     date:{
         type: Date,
-        default: Date.now()
+        default: new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate(),0,0,0)
     }
 });
 
@@ -207,12 +211,20 @@ module.exports = {
     },
     add_report: function (team_id, user_id, callback) {
         var model = mongoose.model("report__" + team_id, report_schema);
-        var report = new model({
-            user:user_id
-        });
-        report.save({new:true},function (err,obj) {
-           if (callback){ callback(err,obj);}
+        model.findOne({user:user_id,date:{$gte: new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate(),0,0,0)}},function (err, obj) {
+            if (obj){callback(err,null);}
+            else {
+                var report = new model({
+                    user: user_id
+                });
+                report.save({new: true}, function (err, obj) {
+                    if (callback) {
+                        callback(err, obj);
+                    }
+                })
+            }
         })
+
     },
     get_all_teams: function (callback) {
         var tm = mongoose.model("team", team_schema);

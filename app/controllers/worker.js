@@ -34,9 +34,7 @@ var do_work = function (task) {
 
                             //console.log("connected to team:" + team.id);
                             slacko.send_reminder_message("Hey " + item.name + "! could you please report your hours " +
-                                "into time reporting tools. after it just simply send me message yes or no", team.id, item.channel);
-
-
+                                "into time reporting tools. After it just simply send me message yes", team.id, item.channel);
                         });
                     }
                 }
