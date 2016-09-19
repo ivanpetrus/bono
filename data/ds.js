@@ -228,7 +228,7 @@ module.exports = {
                 console.error(err);
             }
             if (callback != null) {
-                callback(err, obj);
+                callback(obj);
             }
         })
     },
