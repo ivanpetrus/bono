@@ -13,7 +13,7 @@ var track_rtm = function (rtm, team_id) {
 }
 
 exports.connect = function (team, callback) {
-    console.log("rtms count: " +_rtms.length);
+    console.log("rtm: "+team.id+" is: " +(_rtms[team.id] !=null));
     if (!_rtms[team.id]) {
         console.log("new connection to slack for id :" + team.id);
         var ds = require('../../data/ds');
