@@ -106,6 +106,7 @@ exports.send_message = function (message, user_name, team_id) {
 exports.send_reminder_message = function (message, team_id, channel_id) {
     var rtm = _rtms[team_id];
     if (rtm != null) {
+        console.log("sending message to: " + channel_id);
         rtm.sendMessage(message, channel_id, function (err) {
             if (err) {
                 console.error(err);

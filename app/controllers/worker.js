@@ -22,14 +22,15 @@ var do_work = function (task) {
         var time = parseInt(ts.getHours().toString() + ts.getMinutes().toString());
         var gt = time - 2;
         var lt = time + 2;
-
+        console.log("looking for reminders for time: " + time);
         ds.get_reminders(team.id, {status: "none", time: {$gt: gt, $lt: lt}}, function (err, array) {
-            console.log("reminders:" +array);
-            if (array != null) {
+            //console.log("reminders:" +array);
+            if (array) {
                 for (c in array) {
                     var item = array[c];
 
                     slacko.connect(team, function () {
+                        console.log("connected to team:" +team.id);
                         slacko.send_reminder_message("Hey " + item.name + "! could you please report your hours " +
                             "into time reporting tools. after it just simply send me message yes or no", team.id, item.channel);
                         item.status = "sent";
