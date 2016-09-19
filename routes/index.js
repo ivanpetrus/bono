@@ -58,10 +58,11 @@ module.exports = function (app) {
                             console.log("diff: " + (tmember.tz_offset - server_offset));
 
                             var td =new Date();
-                           // td.setHours(tstring[0]);
-                            //td.setMinutes(tstring[1]);
-                           // var nt = new Date(td.getYear(),td.getMonth(),td.getDay(),tstring[0],tstring[1]);
-                            var tms = new Date (td + tmember.tz_offset);
+
+                            td.setHours(tstring[0]);
+                            td.setMinutes(tstring[1]);
+                            var nt = new Date(td.getYear(),td.getMonth(),td.getDay(),tstring[0],tstring[1]);
+                            var tms = new Date (td.getTime() - tmember.tz_offset*1000);
 
                             console.log("server time is : "+ new Date());
                             console.log("client time is : "+ tms);
@@ -74,7 +75,7 @@ module.exports = function (app) {
                                     channel: channel.id,
                                     name: tmember.name,
                                     status: "none",
-                                    time: parseInt(tstring[0].toString() + tstring[1].toString())
+                                    time: parseInt(tms.getHours().toString() + tms.getMinutes().toString())
                                 }, function (obj) {
 
                                     if (obj != null) {
