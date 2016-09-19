@@ -61,8 +61,8 @@ module.exports = function (app) {
                             td.setHours(tstring[0]);
                             td.setMinutes(tstring[1]);
                             var nt = new Date(td.getYear(),td.getMonth(),td.getDay(),tstring[0],tstring[1]);
-                            var ts = tmember.timestamp;
-                            var tms = new Date (td.getTime() - (td.getTime()- ts));
+                            var ts = tmember.tmestamp;
+                            var tms = new Date (td.getTime() - tmember.tz_offset*1000);
 
                             console.log("server time is : "+ new Date());
                             console.log("client time is : "+ tms);
