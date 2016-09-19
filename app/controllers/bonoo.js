@@ -17,7 +17,7 @@ var handle_message = function (message) {
      ds.add_report(message.team,message.user.id,function (err, obj) {
          if (err){console.error(err);}
          else {
-             
+
          }
      })
     }
