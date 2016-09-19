@@ -54,8 +54,9 @@ var do_work = function (task) {
 }
 
 var do_master_work = function () {
-      console.log('worker');
+    //  console.log('worker');
     ds.get_all_teams(function (err, array) {
+        console.log("team" + array);
         if (err == null && array != null) {
             for (var t in array) {
                 var team = array[t];
