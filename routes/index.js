@@ -63,7 +63,7 @@ module.exports = function (app) {
                            // var nt = new Date(td.getYear(),td.getMonth(),td.getDay(),tstring[0],tstring[1]);
                             var tms = new Date (td + tmember.tz_offset);
 
-                            console.log("server time is : "+ new Date();
+                            console.log("server time is : "+ new Date());
                             console.log("client time is : "+ tms);
                             slacko.send_message("I will work on it, also i wil let you know once it will be done", user.name, team_id);
 
