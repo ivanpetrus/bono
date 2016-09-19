@@ -35,6 +35,8 @@ module.exports = function (app) {
         if (req.body != null) {
             var token = req.body.token;
             var command = req.body.command;
+            console.log("token: " +token);
+            console.log("command: " +command);
             if (token == SLACK_VER_TOKEN && command == "/reminder") {
 
                 var text = req.body.text;
