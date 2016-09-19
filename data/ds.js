@@ -209,18 +209,23 @@ module.exports = {
                 })
             }
         });
-    }
-
-    ,
+    },
     get_all_teams: function (callback) {
         var tm = mongoose.model("team", team_schema);
         tm.find({}, function (err, list) {
             if (err != null) {
                 console.error(err);
             }
-            else if (callback != null) {
-                callback(list);
+            if (callback != null) {
+                callback(err, list);
             }
+        })
+    },
+    get_reminders: function (team_id,options, callback) {
+        var rm = mongoose.model("reminder__" + team_id, reminder_schema);
+        rm.find(options,function (err, array) {
+            if (err !=null){console.error(err);}
+            if (callback!=null){callback(err,array);}
         })
     }
 

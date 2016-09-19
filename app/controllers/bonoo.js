@@ -12,7 +12,7 @@ var track_rtm = function (rtm, team_id) {
     _rtms[team_id] = rtm;
 }
 
-exports.connect = function (team) {
+exports.connect = function (team, callback) {
 
     var ds = require('../../data/ds');
 
@@ -27,42 +27,26 @@ exports.connect = function (team) {
 
         rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, function () {
             console.log('RTM client Connected');
-
+            if (callback!=null){callback();}
         });
 
         rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
-            rtm.send(message);
+             rtm.send(message);
         });
 
         rtm.on(RTM_EVENTS.BOT_ADDED, function () {
             var user = rtm.dataStore.getUserById(team.user);
             var channel = rtm.dataStore.getDMByName(user.name);
-            //rtm.sendMessage("Hello " + user.name + "! I am bono, and I will help you to manage team", channel.id, null);
+            rtm.sendMessage("Hello " + user.name + "! I am bono, and I will help you to manage team", channel.id, null);
             ds.add_client({
                 email: user.profile.email,
                 reminders: []
             }, function (obj) {
 
             })
-            rtm.send({
-                type:"message",
-                text:"interactive message",
-                channel:message.channel,
-                attachments:[
-                    {
-                        actions:[
-                            {
-                                name: "chess",
-                                text: "Chess",
-                                type: "button",
-                                value: "chess"
-                            }
-                        ]
-                    }
-                ]
-            })
+
         })
-    }
+    }else if (callback!=null){callback();}
 }
 exports.get_user_information = function (team_id, user_id) {
     var rtm = _rtms[team_id];
@@ -113,6 +97,12 @@ exports.send_message = function (message, user_name, team_id) {
         var channel = exports.get_channel(team_id,user_name);
         console.log("active channel: " +channel.id);
         rtm.sendMessage(user_name + ", " + message, channel.id);
+    }
+}
+exports.send_reminder_message = function (message,team_id, user_name, channel_id) {
+    var rtm = _rtms[team_id];
+    if (rtm != null) {
+        rtm.sendMessage(user_name + ", " + message, channel_id);
     }
 }
 
