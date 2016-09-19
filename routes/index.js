@@ -43,8 +43,8 @@ module.exports = function (app) {
                 var mname = text.match(/@\w+/g)[0].replace('@', '');
                 var tstring = text.split('=')[1].match(/\d+/g);
                 var tm = new Date();
-                tm.setHours(tstring[0]);
-                tm.setMinutes(tstring[1]);
+                //tm.setHours(tstring[0]);
+                //tm.setMinutes(tstring[1]);
                 var utch = tm.getUTCHours();
                 var utcm = tm.getUTCMinutes();
 
