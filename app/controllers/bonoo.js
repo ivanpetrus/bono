@@ -1,20 +1,24 @@
 /**
  * Created by ivanpetrus on 9/13/16.
  */
-var RtmClient = require('@slack/client').RtmClient;
-var CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS;
-var RTM_EVENTS = require('@slack/client').RTM_EVENTS;
-var MemoryDataStore = require('@slack/client').MemoryDataStore;
 global._rtms ={};
 var _rtms = global._rtms;
+
+console.log("process: "+ process.pid)
 
 var track_rtm = function (rtm, team_id) {
     _rtms[team_id] = rtm;
 }
 
 exports.connect = function (team, callback) {
+    console.log("process: "+ process.pid)
     console.log("rtm: "+team.id+" is: " +(_rtms[team.id] !=null));
     if (!_rtms[team.id]) {
+        var RtmClient = require('@slack/client').RtmClient;
+        var CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS;
+        var RTM_EVENTS = require('@slack/client').RTM_EVENTS;
+        var MemoryDataStore = require('@slack/client').MemoryDataStore;
+
         console.log("new connection to slack for id :" + team.id);
         var ds = require('../../data/ds');
         var rtm = new RtmClient(team.token, {
