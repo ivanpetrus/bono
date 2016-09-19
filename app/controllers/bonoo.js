@@ -20,8 +20,9 @@ exports.connect = function (team, callback) {
             debug: true,
             dataStore: new MemoryDataStore() // pass a new MemoryDataStore instance to cache information
         });
-        rtm.start();
         track_rtm(rtm, team.id);
+        rtm.start();
+       
 
         rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, function () {
             console.log('RTM client Connected');
@@ -68,11 +69,8 @@ exports.get_channel = function (team_id, user_name) {
 
 exports.send_reminder_sucess_message = function (team_id, client_name, user_name ) {
     var rtm = _rtms[team_id];
-    if (rtm != null) {
-        console.log("RTM:" + rtm);
+    if (rtm) {
         var channel = exports.get_channel(team_id,client_name);
-        console.log("channel: ", channel.id);
-
         rtm.sendMessage(client_name + "! I added reporting time for user " + user_name, channel.id);
     }
     else {
