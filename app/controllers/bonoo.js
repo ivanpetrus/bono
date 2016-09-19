@@ -14,6 +14,7 @@ var track_rtm = function (rtm, team_id) {
 
 exports.connect = function (team, callback) {
     if (!_rtms[team.id]) {
+        console.log("new connection to slack for id :" + team);
         var ds = require('../../data/ds');
         var rtm = new RtmClient(team.token, {
             logLevel: 'error', // check this out for more on logger: https://github.com/winstonjs/winston
@@ -32,7 +33,7 @@ exports.connect = function (team, callback) {
         rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
              rtm.send(message);
         });
-
+        rtm.on(RTM_EVENTS);
         rtm.on(RTM_EVENTS.BOT_ADDED, function () {
             var user = rtm.dataStore.getUserById(team.user);
             var channel = rtm.dataStore.getDMByName(user.name);
