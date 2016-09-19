@@ -221,6 +221,17 @@ module.exports = {
             }
         })
     },
+    get_team: function (team_id) {
+        var tm = mongoose.model("team", team_schema);
+        tm.findOne({id:team_id}, function (err, obj) {
+            if (err != null) {
+                console.error(err);
+            }
+            if (callback != null) {
+                callback(err, obj);
+            }
+        })
+    },
     get_reminders: function (team_id,options, callback) {
         var rm = mongoose.model("reminder__" + team_id, reminder_schema);
         rm.find(options,function (err, array) {
