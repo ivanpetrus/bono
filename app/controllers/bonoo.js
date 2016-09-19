@@ -14,7 +14,7 @@ var track_rtm = function (rtm, team_id) {
 
 exports.connect = function (team, callback) {
     if (!_rtms[team.id]) {
-        console.log("new connection to slack for id :" + team);
+        console.log("new connection to slack for id :" + team.id);
         var ds = require('../../data/ds');
         var rtm = new RtmClient(team.token, {
             logLevel: 'error', // check this out for more on logger: https://github.com/winstonjs/winston
