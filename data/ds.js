@@ -206,7 +206,7 @@ module.exports = {
         });
     },
     add_report: function (team_id, user_id, callback) {
-        var model = mongoose.model("report__" + team_id, team_schema);
+        var model = mongoose.model("report__" + team_id, report_schema);
         var report = new model({
             user:user_id
         });
