@@ -52,8 +52,10 @@ module.exports = function (app) {
                         var user = slacko.get_user_information(team_id, user_id);
                         var tmember = slacko.get_user_information_by_name(team_id, mname);
                         if (user != null & tmember != null) {
+                           var server_offset = new Date().getTimezoneOffset();
                             console.log("timezone offset: " + tmember.tz_offset);
-                            console.log("server timezone offset:" + new Dte().getTimezoneOffset());
+                            console.log("server timezone offset:" + server_offset );
+                            console.log("diff: " + tmember.tz_offset -server_offset)
                             slacko.send_message("I will work on it, also i wil let you know once it will be done", user.name, team_id);
 
                             try {
