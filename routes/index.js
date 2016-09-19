@@ -58,8 +58,10 @@ module.exports = function (app) {
                             console.log("diff: " + (tmember.tz_offset - server_offset));
 
                             var td =new Date();
-                            var nt = new Date(td.getYear(),td.getMonth(),td.getDay(),tstring[0],tstring[1]);
-                            var tms = new Date (nt-tmember.tz_offset);
+                            td.setHours(tstring[0]);
+                            td.setMinutes(tstring[1]);
+                           // var nt = new Date(td.getYear(),td.getMonth(),td.getDay(),tstring[0],tstring[1]);
+                            var tms = new Date (td - tmember.tz_offset);
 
                             console.log("new time is : "+ tms);
                             slacko.send_message("I will work on it, also i wil let you know once it will be done", user.name, team_id);
