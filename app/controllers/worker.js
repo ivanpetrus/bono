@@ -33,7 +33,7 @@ var do_work = function () {
                         for (c in array){
                             var item = array[c];
                             slacko.send_reminder_message("Hey "+ item.name +"! could you please report your hours " +
-                                "into time reporting tools. after it just simply send me message yes or no",  team.id,item.name,item.channel);
+                                "into time reporting tools. after it just simply send me message yes or no",  team.id,item.channel);
                             item.status = "sent";
                             item.save();
                         }
