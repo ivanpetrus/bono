@@ -1,5 +1,5 @@
 var Request = require('request')
-var worker = require('/app/controllers/worker');
+var worker = require('../app/controllers/worker');
 var ds = require('../data/ds');
 var SLACK_VER_TOKEN = "QC1xodgjZRUwlySDLnIxCm6F";
 /* GET home page. */

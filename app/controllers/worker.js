@@ -72,29 +72,34 @@ var do_master_work = function (worker) {
     })
 }
 
-exports.run = function () {
+module.exports = {
+    run: function () {
 
-    if (cluster.isMaster) {
-        var wids = [];
-        var cwid = 0;
+            if (cluster.isMaster) {
+                var wids = [];
+                var cwid = 0;
 
-        var workers = require('os').cpus().length;
+                var workers = 1//require('os').cpus().length;
 
-        for (var i = 0; i < workers; i++) {
-            cluster.fork();
+                for (var i = 0; i < workers; i++) {
+                    cluster.fork();
+                }
+                for (var wid in cluster.workers) {
+                    wids.push(wid);
+                }
+                setInterval(function () {
+                    var worker = cluster.workers[wids[cwid]];
+                    if (worker) {
+                        do_master_work(worker);
+                    }
+                    cwid++;
+                    if (cwid >= wids.length) {
+                        cwid = 0;
+                    }
+                }, 1000);
+            }
+            else {
+                do_work();
+            }
         }
-        for(var wid in cluster.workers) {
-            wids.push(wid);
-        }
-        setInterval(function () {
-            var worker = cluster.workers[wids[cwid]];
-            do_master_work(worker);
-            cwid++;
-            if (cwid >= wids.length){ cwid = 0; }
-        }, 1000);
-    }
-    else {
-        do_work();
-    }
 }
-exports.run();
