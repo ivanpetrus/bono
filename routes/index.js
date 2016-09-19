@@ -45,9 +45,11 @@ module.exports = function (app) {
                 var tm = new Date();
                 tm.setHours(tstring[0]);
                 tm.setMinutes(tstring[1]);
-                var utc = tm.getUTCDate();
+                var utch = tm.getUTCHours();
+                var utcm = tm.getUTCMinutes();
 
-                console.log("utc: " +utc);
+                console.log("utch: " +utch);
+                console.log("utcm: " +utcm);
                 ds.get_team(team_id, function (obj) {
                     if (!obj){
                         console.log("I could not fnd the team for id:" + team_id);
