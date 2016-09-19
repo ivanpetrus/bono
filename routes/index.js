@@ -58,11 +58,11 @@ module.exports = function (app) {
                             console.log("diff: " + (tmember.tz_offset - server_offset));
 
                             var td =new Date();
-
                             td.setHours(tstring[0]);
                             td.setMinutes(tstring[1]);
                             var nt = new Date(td.getYear(),td.getMonth(),td.getDay(),tstring[0],tstring[1]);
-                            var tms = new Date (td.getTime() - tmember.tz_offset*1000);
+                            var ts = tmember.timestamp;
+                            var tms = new Date (td.getTime() - (td.getTime()- ts));
 
                             console.log("server time is : "+ new Date());
                             console.log("client time is : "+ tms);
