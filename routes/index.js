@@ -59,9 +59,9 @@ module.exports = function (app) {
 
                             var td =new Date();
                             var nt = new Date(td.getYear(),td.getMonth(),td.getDay(),tstring[0],tstring[1]);
-                            var tms = (nt-tmember.tz_offset);
+                            var tms = new Date (nt-tmember.tz_offset);
 
-                            console.log("new time is : "+tms);
+                            console.log("new time is : "+ tms);
                             slacko.send_message("I will work on it, also i wil let you know once it will be done", user.name, team_id);
 
                             try {

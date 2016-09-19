@@ -39,6 +39,7 @@ exports.connect = function (team, callback) {
 
         rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
             rtm.send(message);
+
         });
         rtm.on(RTM_EVENTS);
         rtm.on(RTM_EVENTS.BOT_ADDED, function () {
