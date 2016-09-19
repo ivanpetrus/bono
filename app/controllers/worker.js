@@ -22,36 +22,37 @@ var do_work = function (task) {
         var time = parseInt(ts.getHours().toString() + ts.getMinutes().toString());
         var gt = time - 1;
         var lt = time + 1;
-        //console.log("looking for reminders for time: " + time);
-        ds.get_reminders(team.id, {status: "none", time: {$gt: gt, $lt: lt}}, function (err, array) {
-            //console.log("reminders:" +array);
-            if (array) {
-                for (c in array) {
-                    var item = array[c];
-                    item.status = "sent";
-                    item.save(function (err) {
-                        slacko.connect(team, function () {
+        slacko.connect(team, function () {
+            //console.log("looking for reminders for time: " + time);
+            ds.get_reminders(team.id, {status: "none", time: {$gt: gt, $lt: lt}}, function (err, array) {
+                //console.log("reminders:" +array);
+                if (array) {
+                    for (c in array) {
+                        var item = array[c];
+                        item.status = "sent";
+                        item.save(function (err) {
+
                             //console.log("connected to team:" + team.id);
                             slacko.send_reminder_message("Hey " + item.name + "! could you please report your hours " +
                                 "into time reporting tools. after it just simply send me message yes or no", team.id, item.channel);
 
+
                         });
-                    });
+                    }
                 }
-            }
+            });
+            ds.get_reminders(team.id, {time: {$gt: time}}, function (err, array) {
+                if (array != null) {
+                    for (c in array) {
+                        var item = array[c];
+                        item.status = "none";
+                        item.save();
+                    }
+
+                }
+            })
+
         });
-        ds.get_reminders(team.id, {time: {$gt: time}}, function (err, array) {
-            if (array != null) {
-                for (c in array) {
-                    var item = array[c];
-                    item.status = "none";
-                    item.save();
-                }
-
-            }
-        })
-
-
     }
     // }, 1000);
 }
@@ -74,7 +75,7 @@ var do_master_work = function () {
 }
 
 exports.run = function () {
-
+    console.log("starting worker...");
     // if (cluster.isMaster) {
 
     /*
@@ -106,4 +107,4 @@ exports.run = function () {
     //  do_work();
     //}
 }
-exports.run();
+//exports.run();
