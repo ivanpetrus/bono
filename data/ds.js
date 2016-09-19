@@ -221,7 +221,7 @@ module.exports = {
             }
         })
     },
-    get_team: function (team_id) {
+    get_team: function (team_id, callback) {
         var tm = mongoose.model("team", team_schema);
         tm.findOne({id:team_id}, function (err, obj) {
             if (err != null) {
