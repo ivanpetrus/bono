@@ -19,7 +19,7 @@ var do_work = function () {
         if (task.type == "reminder") {
             var team = task.data;
             var ts = new Date();
-            var time = 1234;//parseInt(ts.getHours().toString()+ts.getMinutes().toString());
+            var time = parseInt(ts.getHours().toString()+ts.getMinutes().toString());
             var gt = time - 2;
             var lt = time + 2;
             slacko.connect({
@@ -28,7 +28,7 @@ var do_work = function () {
                 user: team.user,
                 url: team.url
             },function () {
-                ds.get_reminders(team.id,{status:null, time:{$gt:gt,$lt:lt}}, function (err, array) {
+                ds.get_reminders(team.id,{status:"none",time:{$gt:gt,$lt:lt}}, function (err, array) {
                     if (array != null) {
                         for (c in array){
                             var item = array[c];
@@ -40,7 +40,7 @@ var do_work = function () {
 
                     }
                 })
-                ds.get_reminders(team.id,{time:{$gt:gt}}, function (err, array) {
+                ds.get_reminders(team.id,{time:{$gt:time}}, function (err, array) {
                     if (array != null) {
                         for (c in array){
                             var item = array[c];
@@ -73,9 +73,10 @@ var do_master_work = function (worker) {
 }
 
 module.exports = {
-    run: function () {
+    run: function (action) {
 
             if (cluster.isMaster) {
+                action();
                 var wids = [];
                 var cwid = 0;
 

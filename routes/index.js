@@ -1,5 +1,5 @@
 var Request = require('request')
-var worker = require('../app/controllers/worker');
+
 var ds = require('../data/ds');
 var SLACK_VER_TOKEN = "QC1xodgjZRUwlySDLnIxCm6F";
 /* GET home page. */
@@ -55,6 +55,7 @@ module.exports = function (app) {
                             team: team_id,
                             channel: channel.id,
                             name: tmember.name,
+                            status:"none",
                             time: parseInt(tstring[0].toString() + tstring[1].toString())
                         }, function (obj) {
 
@@ -186,6 +187,5 @@ module.exports = function (app) {
 
     start_existing_bots();
     */
- worker.run();
 }
 
