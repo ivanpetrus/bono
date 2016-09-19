@@ -1,13 +1,13 @@
-var Request = require('request')
+var Request = require('request');
 var cluster = require('cluster');
-
+var slacko = require('../app/controllers/bonoo');
 var ds = require('../data/ds');
 var SLACK_VER_TOKEN = "QC1xodgjZRUwlySDLnIxCm6F";
 /* GET home page. */
 
 module.exports = function (app) {
     //var slack = require('../app/controllers/bono')
-    var slacko = require('../app/controllers/bonoo')
+
     app.get('/', function (req, res, next) {
         res.render('index', {
             title: 'Express',
@@ -31,8 +31,6 @@ module.exports = function (app) {
     })
 
     app.post('/reminder', function (req, resp) {
-       if (!cluster.isMaster){return;}
-
         if (req.body != null) {
             var token = req.body.token;
             var command = req.body.command;

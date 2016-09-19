@@ -19,38 +19,33 @@ var do_work = function () {
         if (task.type == "reminder") {
             var team = task.data;
             var ts = new Date();
-            var time = parseInt(ts.getHours().toString()+ts.getMinutes().toString());
+            var time = parseInt(ts.getHours().toString() + ts.getMinutes().toString());
             var gt = time - 2;
             var lt = time + 2;
-            slacko.connect({
-                id: team.id,
-                token: team.token,
-                user: team.user,
-                url: team.url
-            },function () {
-                ds.get_reminders(team.id,{status:"none",time:{$gt:gt,$lt:lt}}, function (err, array) {
-                    if (array != null) {
-                        for (c in array){
-                            var item = array[c];
-                            slacko.send_reminder_message("Hey "+ item.name +"! could you please report your hours " +
-                                "into time reporting tools. after it just simply send me message yes or no",  team.id,item.channel);
-                            item.status = "sent";
-                            item.save();
-                        }
-
+            var rtm = task.rtm;
+            ds.get_reminders(team.id, {status: "none", time: {$gt: gt, $lt: lt}}, function (err, array) {
+                if (array != null) {
+                    for (c in array) {
+                        var item = array[c];
+                        rtm.send_reminder_message("Hey " + item.name + "! could you please report your hours " +
+                            "into time reporting tools. after it just simply send me message yes or no", team.id, item.channel);
+                        item.status = "sent";
+                        item.save();
                     }
-                })
-                ds.get_reminders(team.id,{time:{$gt:time}}, function (err, array) {
-                    if (array != null) {
-                        for (c in array){
-                            var item = array[c];
-                            item.status = "none";
-                            item.save();
-                        }
 
+                }
+            })
+            ds.get_reminders(team.id, {time: {$gt: time}}, function (err, array) {
+                if (array != null) {
+                    for (c in array) {
+                        var item = array[c];
+                        item.status = "none";
+                        item.save();
                     }
-                })
-            });
+
+                }
+            })
+
 
         }
     }, 1000);
@@ -61,12 +56,14 @@ var do_master_work = function (worker) {
         if (err == null && array != null) {
             for (var t in array) {
                 var team = array[t];
-
-                worker.send({
-                    type: "reminder",
-                    from: "master",
-                    data: team
-                })
+                slacko.connect(team, function (rtm) {
+                    worker.send({
+                        type: "reminder",
+                        from: "master",
+                        data: team,
+                        rtm: rtm
+                    });
+                });
             }
         }
     })
@@ -75,32 +72,32 @@ var do_master_work = function (worker) {
 module.exports = {
     run: function (action) {
 
-            if (cluster.isMaster) {
-                action();
-                var wids = [];
-                var cwid = 0;
+        if (cluster.isMaster) {
+            action();
+            var wids = [];
+            var cwid = 0;
 
-                var workers = 1//require('os').cpus().length;
+            var workers = 1//require('os').cpus().length;
 
-                for (var i = 0; i < workers; i++) {
-                    cluster.fork();
-                }
-                for (var wid in cluster.workers) {
-                    wids.push(wid);
-                }
-                setInterval(function () {
-                    var worker = cluster.workers[wids[cwid]];
-                    if (worker) {
-                        do_master_work(worker);
-                    }
-                    cwid++;
-                    if (cwid >= wids.length) {
-                        cwid = 0;
-                    }
-                }, 1000);
+            for (var i = 0; i < workers; i++) {
+                cluster.fork();
             }
-            else {
-                do_work();
+            for (var wid in cluster.workers) {
+                wids.push(wid);
             }
+            setInterval(function () {
+                var worker = cluster.workers[wids[cwid]];
+                if (worker) {
+                    do_master_work(worker);
+                }
+                cwid++;
+                if (cwid >= wids.length) {
+                    cwid = 0;
+                }
+            }, 1000);
         }
+        else {
+            do_work();
+        }
+    }
 }
