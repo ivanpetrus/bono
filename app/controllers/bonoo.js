@@ -13,10 +13,8 @@ var track_rtm = function (rtm, team_id) {
 }
 
 exports.connect = function (team, callback) {
-
-    var ds = require('../../data/ds');
-
     if (!_rtms[team.id]) {
+        var ds = require('../../data/ds');
         var rtm = new RtmClient(team.token, {
             logLevel: 'error', // check this out for more on logger: https://github.com/winstonjs/winston
             debug: true,

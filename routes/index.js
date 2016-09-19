@@ -1,4 +1,5 @@
 var Request = require('request')
+var cluster = require('cluster');
 
 var ds = require('../data/ds');
 var SLACK_VER_TOKEN = "QC1xodgjZRUwlySDLnIxCm6F";
@@ -30,8 +31,8 @@ module.exports = function (app) {
     })
 
     app.post('/reminder', function (req, resp) {
+       if (!cluster.isMaster){return;}
 
-        //slacko.send_message("test","ivan","T252CCFH6");
         if (req.body != null) {
             var token = req.body.token;
             var command = req.body.command;
@@ -182,24 +183,5 @@ module.exports = function (app) {
         });
     }
 
-
-    // START existing bots
-    /*
-     var start_existing_bots = function () {
-     ds.get_all_teams(function (list) {
-     for (var t in list) {
-     var team = list[t];
-     slacko.connect({
-     id: team.id,
-     token: team.token,
-     user: team.user,
-     url: team.url
-     });
-     }
-     })
-     }
-
-     start_existing_bots();
-     */
 }
 
