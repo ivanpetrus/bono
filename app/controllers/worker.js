@@ -5,17 +5,17 @@ var cluster = require('cluster');
 var ds = require('../../data/ds');
 var slacko = require('./bonoo');
 
-var do_work = function () {
-    var tasks = [];
+var do_work = function (task) {
+   // var tasks = [];
 
-    process.on('message', function (message) {
-        tasks.push(message);
-    });
-    setInterval(function () {
-        if (tasks.length == 0) {
-            return;
-        }
-        var task = tasks.pop();
+    //process.on('message', function (message) {
+      //  tasks.push(message);
+    //});
+    //setInterval(function () {
+      //  if (tasks.length == 0) {
+        //    return;
+        //}
+        //var task = tasks.pop();
         if (task.type == "reminder") {
             var team = task.data;
             var ts = new Date();
@@ -48,21 +48,28 @@ var do_work = function () {
 
 
         }
-    }, 1000);
+   // }, 1000);
 }
 
-var do_master_work = function (worker) {
+var do_master_work = function () {
     ds.get_all_teams(function (err, array) {
         if (err == null && array != null) {
             for (var t in array) {
                 var team = array[t];
                 slacko.connect(team, function (rtm) {
-                    worker.send({
+                   /* worker.send({
                         type: "reminder",
                         from: "master",
                         data: team,
                         rtm: rtm
                     });
+                    */
+                   do_work({
+                       type: "reminder",
+                       from: "master",
+                       data: team,
+                       rtm: rtm
+                   });
                 });
             }
         }
@@ -72,8 +79,9 @@ var do_master_work = function (worker) {
 module.exports = {
     run: function (action) {
 
-        if (cluster.isMaster) {
+       // if (cluster.isMaster) {
             action();
+        /*
             var wids = [];
             var cwid = 0;
 
@@ -85,19 +93,21 @@ module.exports = {
             for (var wid in cluster.workers) {
                 wids.push(wid);
             }
+            */
             setInterval(function () {
-                var worker = cluster.workers[wids[cwid]];
-                if (worker) {
-                    do_master_work(worker);
-                }
-                cwid++;
-                if (cwid >= wids.length) {
-                    cwid = 0;
-                }
+                do_master_work();
+               // var worker = cluster.workers[wids[cwid]];
+                //if (worker) {
+                   // do_master_work(worker);
+                //}
+                //cwid++;
+                //if (cwid >= wids.length) {
+                  //  cwid = 0;
+               // }
             }, 1000);
-        }
-        else {
-            do_work();
-        }
+        //}
+        //else {
+          //  do_work();
+        //}
     }
 }

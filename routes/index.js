@@ -34,8 +34,6 @@ module.exports = function (app) {
         if (req.body != null) {
             var token = req.body.token;
             var command = req.body.command;
-            //console.log("token: " + token);
-           // console.log("command: " + command);
             if (token == SLACK_VER_TOKEN && command == "/reminder") {
 
                 var text = req.body.text;
@@ -53,8 +51,6 @@ module.exports = function (app) {
                     slacko.connect(obj, function () {
                         var user = slacko.get_user_information(team_id, user_id);
                         var tmember = slacko.get_user_information_by_name(team_id, mname);
-                       // console.log("user: " + user);
-                      //  console.log("member: " + tmember);
                         if (user != null & tmember != null) {
                             slacko.send_message("I will work on it, also i wil let you know once it will be done", user.name, team_id);
 
