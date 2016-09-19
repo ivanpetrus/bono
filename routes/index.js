@@ -47,6 +47,10 @@ module.exports = function (app) {
                 var tstring = text.split('=')[1].match(/\d+/g);
 
                 ds.get_team(team_id, function (obj) {
+                    if (!obj){
+                        console.log("I could not fnd the team for id:" + team_id);
+                        return;
+                    }
                     slacko.connect(obj, function () {
                         var user = slacko.get_user_information(team_id, user_id);
                         var tmember = slacko.get_user_information_by_name(team_id, mname);
