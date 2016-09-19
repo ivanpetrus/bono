@@ -22,7 +22,7 @@ var do_work = function (task) {
         var time = parseInt(ts.getHours().toString() + ts.getMinutes().toString());
         var gt = time - 2;
         var lt = time + 2;
-        console.log("looking for reminders for time: " + time);
+        //console.log("looking for reminders for time: " + time);
         ds.get_reminders(team.id, {status: "none", time: {$gt: gt, $lt: lt}}, function (err, array) {
             //console.log("reminders:" +array);
             if (array) {

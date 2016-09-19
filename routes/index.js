@@ -42,7 +42,12 @@ module.exports = function (app) {
 
                 var mname = text.match(/@\w+/g)[0].replace('@', '');
                 var tstring = text.split('=')[1].match(/\d+/g);
+                var tm = new Date();
+                tm.setHours(tstring[0]);
+                tm.setMinutes(tstring[1]);
+                var utc = tm.getUTCDate();
 
+                console.log("utc: " +utc);
                 ds.get_team(team_id, function (obj) {
                     if (!obj){
                         console.log("I could not fnd the team for id:" + team_id);
