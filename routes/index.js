@@ -42,14 +42,7 @@ module.exports = function (app) {
 
                 var mname = text.match(/@\w+/g)[0].replace('@', '');
                 var tstring = text.split('=')[1].match(/\d+/g);
-                var tm = new Date();
-                //tm.setHours(tstring[0]);
-                //tm.setMinutes(tstring[1]);
-                var utch = tm.getUTCHours();
-                var utcm = tm.getUTCMinutes();
-
-                console.log("utch: " +utch);
-                console.log("utcm: " +utcm);
+               
                 ds.get_team(team_id, function (obj) {
                     if (!obj){
                         console.log("I could not fnd the team for id:" + team_id);
@@ -59,6 +52,8 @@ module.exports = function (app) {
                         var user = slacko.get_user_information(team_id, user_id);
                         var tmember = slacko.get_user_information_by_name(team_id, mname);
                         if (user != null & tmember != null) {
+                            console.log("timezone offset: " + tmember.tz_offset);
+                            consol.log("server timezone offset:" + new Dte().getTimezoneOffset());
                             slacko.send_message("I will work on it, also i wil let you know once it will be done", user.name, team_id);
 
                             try {
