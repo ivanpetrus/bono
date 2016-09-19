@@ -4,8 +4,6 @@
  * Module dependencies.
  */
 var worker = require('../app/controllers/worker');
-worker.run(function () {
-
 
   var app = require('../app');
   var debug = require('debug')('Bono:server');
@@ -91,5 +89,4 @@ worker.run(function () {
         : 'port ' + addr.port;
     debug('Listening on ' + bind);
   }
-
-});
+worker.run();
