@@ -23,38 +23,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="bonoo.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="bonoo.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/bonoo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
+            <state relative-caret-position="252">
+              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
               <folding>
                 <element signature="e#0#44#0" expanded="false" />
-                <element signature="e#246#1988#0" expanded="false" />
-                <element signature="e#2048#2161#0" expanded="false" />
-                <element signature="e#2231#2348#0" expanded="false" />
-                <element signature="e#2401#2575#0" expanded="false" />
-                <element signature="e#2659#2961#0" expanded="false" />
-                <element signature="e#3021#3289#0" expanded="false" />
-                <element signature="e#3352#3596#0" expanded="false" />
-                <element signature="e#3669#4014#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/routes/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="446">
-              <caret line="77" column="95" selection-start-line="77" selection-start-column="95" selection-end-line="77" selection-end-column="95" />
-              <folding>
-                <element signature="e#353#805#0" expanded="false" />
-                <element signature="e#5404#6178#0" expanded="false" />
-                <element signature="e#6225#7380#0" expanded="false" />
-                <element signature="e#6708#7152#0" expanded="false" />
-                <element signature="e#7418#7790#0" expanded="false" />
-                <element signature="e#7487#7618#0" expanded="false" />
+                <element signature="e#2345#2458#0" expanded="false" />
+                <element signature="e#2528#2645#0" expanded="false" />
+                <element signature="e#2698#2872#0" expanded="false" />
+                <element signature="e#2956#3258#0" expanded="false" />
+                <element signature="e#3318#3586#0" expanded="false" />
+                <element signature="e#3649#3893#0" expanded="false" />
+                <element signature="e#3966#4311#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -63,8 +45,8 @@
       <file leaf-file-name="worker.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/worker.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="25" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="25" />
+            <state relative-caret-position="225">
+              <caret line="35" column="106" selection-start-line="35" selection-start-column="106" selection-end-line="35" selection-end-column="106" />
               <folding />
             </state>
           </provider>
@@ -76,6 +58,27 @@
             <state relative-caret-position="582">
               <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ds.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/ds.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="522">
+              <caret line="208" column="54" selection-start-line="208" selection-start-column="54" selection-end-line="208" selection-end-column="54" />
+              <folding>
+                <element signature="e#0#44#0" expanded="false" />
+                <element signature="e#240#371#0" expanded="false" />
+                <element signature="e#1351#1491#0" expanded="false" />
+                <element signature="e#2816#3895#0" expanded="false" />
+                <element signature="e#3972#4575#0" expanded="false" />
+                <element signature="e#4625#5896#0" expanded="false" />
+                <element signature="e#5952#6209#0" expanded="false" />
+                <element signature="e#6250#6533#0" expanded="false" />
+                <element signature="e#6578#6867#0" expanded="false" />
+                <element signature="e#6925#7168#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -106,12 +109,12 @@
         <option value="$PROJECT_DIR$/data/datasource.js" />
         <option value="$PROJECT_DIR$/views/index.jade" />
         <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/data/ds.js" />
         <option value="$PROJECT_DIR$/bin/www" />
-        <option value="$PROJECT_DIR$/app/controllers/worker.js" />
-        <option value="$PROJECT_DIR$/app/controllers/bonoo.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/app/controllers/worker.js" />
+        <option value="$PROJECT_DIR$/data/ds.js" />
+        <option value="$PROJECT_DIR$/app/controllers/bonoo.js" />
       </list>
     </option>
   </component>
@@ -186,6 +189,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bono" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bono" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -345,7 +362,7 @@
       <workItem from="1473877836754" duration="11408000" />
       <workItem from="1474050538028" duration="20000" />
       <workItem from="1474274050875" duration="1254000" />
-      <workItem from="1474276302057" duration="15943000" />
+      <workItem from="1474276302057" duration="18521000" />
     </task>
     <task id="LOCAL-00001" summary="add slack button">
       <created>1473679133172</created>
@@ -358,7 +375,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95723000" />
+    <option name="totallyTimeSpent" value="98301000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -409,7 +426,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="201" />
+      <option name="time" value="202" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -704,22 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/ds.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="73" column="6" selection-start-line="73" selection-start-column="6" selection-end-line="73" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#44#0" expanded="false" />
-            <element signature="e#240#371#0" expanded="false" />
-            <element signature="e#1653#2850#0" expanded="false" />
-            <element signature="e#2896#3975#0" expanded="false" />
-            <element signature="e#4052#4655#0" expanded="false" />
-            <element signature="e#4705#6136#0" expanded="false" />
-            <element signature="e#6852#7095#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/datasource.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="672">
@@ -743,43 +744,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+          <folding>
+            <element signature="e#254#7207#0" expanded="false" />
+            <element signature="e#353#805#0" expanded="false" />
+            <element signature="e#1293#4641#0" expanded="false" />
+            <element signature="e#4818#5592#0" expanded="false" />
+            <element signature="e#5639#6794#0" expanded="false" />
+            <element signature="e#6122#6566#0" expanded="false" />
+            <element signature="e#6832#7204#0" expanded="false" />
+            <element signature="e#6901#7032#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/worker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="25" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="25" />
+        <state relative-caret-position="225">
+          <caret line="35" column="106" selection-start-line="35" selection-start-column="106" selection-end-line="35" selection-end-column="106" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/ds.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="208" column="54" selection-start-line="208" selection-start-column="54" selection-end-line="208" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#44#0" expanded="false" />
+            <element signature="e#240#371#0" expanded="false" />
+            <element signature="e#1351#1491#0" expanded="false" />
+            <element signature="e#2816#3895#0" expanded="false" />
+            <element signature="e#3972#4575#0" expanded="false" />
+            <element signature="e#4625#5896#0" expanded="false" />
+            <element signature="e#5952#6209#0" expanded="false" />
+            <element signature="e#6250#6533#0" expanded="false" />
+            <element signature="e#6578#6867#0" expanded="false" />
+            <element signature="e#6925#7168#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/bonoo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
+        <state relative-caret-position="252">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
           <folding>
             <element signature="e#0#44#0" expanded="false" />
-            <element signature="e#246#1988#0" expanded="false" />
-            <element signature="e#2048#2161#0" expanded="false" />
-            <element signature="e#2231#2348#0" expanded="false" />
-            <element signature="e#2401#2575#0" expanded="false" />
-            <element signature="e#2659#2961#0" expanded="false" />
-            <element signature="e#3021#3289#0" expanded="false" />
-            <element signature="e#3352#3596#0" expanded="false" />
-            <element signature="e#3669#4014#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="77" column="95" selection-start-line="77" selection-start-column="95" selection-end-line="77" selection-end-column="95" />
-          <folding>
-            <element signature="e#353#805#0" expanded="false" />
-            <element signature="e#5404#6178#0" expanded="false" />
-            <element signature="e#6225#7380#0" expanded="false" />
-            <element signature="e#6708#7152#0" expanded="false" />
-            <element signature="e#7418#7790#0" expanded="false" />
-            <element signature="e#7487#7618#0" expanded="false" />
+            <element signature="e#2345#2458#0" expanded="false" />
+            <element signature="e#2528#2645#0" expanded="false" />
+            <element signature="e#2698#2872#0" expanded="false" />
+            <element signature="e#2956#3258#0" expanded="false" />
+            <element signature="e#3318#3586#0" expanded="false" />
+            <element signature="e#3649#3893#0" expanded="false" />
+            <element signature="e#3966#4311#0" expanded="false" />
           </folding>
         </state>
       </provider>

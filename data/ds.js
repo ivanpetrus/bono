@@ -31,10 +31,6 @@ var client_schema = new mongoose.Schema({
         type: Array,
         default: []
     },
-    mdate: {
-        type: Date,
-        default: Date.now()
-    }
 });
 
 //TEAM will be multi- tenant
@@ -50,18 +46,22 @@ var reminder_schema = new mongoose.Schema({
     },
     status: {
         type: String,
-        default: "none" // could be: [confirmed],[rejected],[none]
-    },
-    type: {
-        type: String,
-        default: "salutation" // here will be at list [mute], [salutation], [reminder]
+        default: "none" // could be: [sent],[none]
     },
     time: {
         type: Number,
         default: 1000
+    }
+});
+
+var report_schema = new mongoose.Schema({
+    user:{
+        type:String,
+        required: true,
     },
-    mdate: {
+    date:{
         type: Date,
+        required: true,
         default: Date.now()
     }
 });
@@ -179,9 +179,7 @@ module.exports = {
                 obj.update({
                     status: reminder.status,
                     name: reminder.name,
-                    time: reminder.time,
-                    type: reminder.type,
-                    mdate: Date.now()
+                    time: reminder.time
                 }, function (err, obj) {
                     if (err != null) {
                         console.error(err);
@@ -195,9 +193,7 @@ module.exports = {
                     channel: reminder.channel,
                     status: reminder.status,
                     name: reminder.name,
-                    time: reminder.time,
-                    type: reminder.type,
-                    mdate: Date.now()
+                    time: reminder.time
                 });
                 r.save({new: true}, function (err, obj) {
                     if (err != null) {
@@ -209,6 +205,15 @@ module.exports = {
                 })
             }
         });
+    },
+    add_report: function (team_id, user_id, callback) {
+        var model = mongoose.model("report__" + team_id, team_schema);
+        var report = new model({
+            user:user_id
+        });
+        report.save({new:true},function (err,obj) {
+           if (callback){ callback(err,obj);}
+        })
     },
     get_all_teams: function (callback) {
         var tm = mongoose.model("team", team_schema);

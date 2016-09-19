@@ -52,20 +52,10 @@ module.exports = function (app) {
                         var user = slacko.get_user_information(team_id, user_id);
                         var tmember = slacko.get_user_information_by_name(team_id, mname);
                         if (user != null & tmember != null) {
-                           var server_offset = new Date().getTimezoneOffset();
-                            console.log("timezone offset: " + tmember.tz_offset);
-                            console.log("server timezone offset:" + server_offset );
-                            console.log("diff: " + (tmember.tz_offset - server_offset));
-
                             var td =new Date();
                             td.setHours(tstring[0]);
                             td.setMinutes(tstring[1]);
-                            var nt = new Date(td.getYear(),td.getMonth(),td.getDay(),tstring[0],tstring[1]);
-                            var ts = tmember.tmestamp;
                             var tms = new Date (td.getTime() - tmember.tz_offset*1000);
-
-                            console.log("server time is : "+ new Date());
-                            console.log("client time is : "+ tms);
                             slacko.send_message("I will work on it, also i wil let you know once it will be done", user.name, team_id);
 
                             try {
@@ -85,7 +75,7 @@ module.exports = function (app) {
                                                 slacko.send_error_message(team_id, user.name);
                                             }
                                             else {
-                                                console.log("sending sucess message to " + user.name + " in team: " + team_id);
+                                               // console.log("sending sucess message to " + user.name + " in team: " + team_id);
                                                 slacko.send_reminder_sucess_message(team_id, user.name, tmember.name);
                                             }
                                         });

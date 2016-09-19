@@ -1,6 +1,7 @@
 /**
  * Created by ivanpetrus on 9/13/16.
  */
+var ds = require('../../data/ds');
 global._rtms = {};
 var _rtms = global._rtms;
 
@@ -10,6 +11,17 @@ var track_rtm = function (rtm, team_id) {
     _rtms[team_id] = rtm;
 }
 
+var handle_message = function (message) {
+
+    if (message.text.toLowerCase().indexOf("yes")!=-1){
+     ds.add_report(message.team,message.user.id,function (err, obj) {
+         if (err){console.error(err);}
+         else {
+             
+         }
+     })
+    }
+}
 exports.connect = function (team, callback) {
     // console.log("process: "+ process.pid)
     //  console.log("rtm: "+team.id+" is: " +(_rtms[team.id] !=null));
@@ -20,7 +32,7 @@ exports.connect = function (team, callback) {
         var MemoryDataStore = require('@slack/client').MemoryDataStore;
 
         console.log("new connection to slack for id :" + team.id);
-        var ds = require('../../data/ds');
+
         var rtm = new RtmClient(team.token, {
             logLevel: 'error', // check this out for more on logger: https://github.com/winstonjs/winston
             debug: true,
@@ -38,7 +50,8 @@ exports.connect = function (team, callback) {
         });
 
         rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
-            rtm.send(message);
+            //rtm.send(message);
+            handle_message(message);
 
         });
         rtm.on(RTM_EVENTS);

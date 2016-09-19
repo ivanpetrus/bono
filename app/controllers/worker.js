@@ -20,26 +20,26 @@ var do_work = function (task) {
         var team = task.data;
         var ts = new Date();
         var time = parseInt(ts.getHours().toString() + ts.getMinutes().toString());
-        var gt = time - 2;
-        var lt = time + 2;
+        var gt = time - 1;
+        var lt = time + 1;
         //console.log("looking for reminders for time: " + time);
         ds.get_reminders(team.id, {status: "none", time: {$gt: gt, $lt: lt}}, function (err, array) {
             //console.log("reminders:" +array);
             if (array) {
                 for (c in array) {
                     var item = array[c];
+                    item.status = "sent";
+                    item.save(function (err) {
+                        slacko.connect(team, function () {
+                            //console.log("connected to team:" + team.id);
+                            slacko.send_reminder_message("Hey " + item.name + "! could you please report your hours " +
+                                "into time reporting tools. after it just simply send me message yes or no", team.id, item.channel);
 
-                    slacko.connect(team, function () {
-                        console.log("connected to team:" +team.id);
-                        slacko.send_reminder_message("Hey " + item.name + "! could you please report your hours " +
-                            "into time reporting tools. after it just simply send me message yes or no", team.id, item.channel);
-                        item.status = "sent";
-                        item.save();
+                        });
                     });
                 }
-
             }
-        })
+        });
         ds.get_reminders(team.id, {time: {$gt: time}}, function (err, array) {
             if (array != null) {
                 for (c in array) {
@@ -59,7 +59,7 @@ var do_work = function (task) {
 var do_master_work = function () {
     //  console.log('worker');
     ds.get_all_teams(function (err, array) {
-      //  console.log("team" + array);
+        //  console.log("team" + array);
         if (err == null && array != null) {
             for (var t in array) {
                 var team = array[t];
