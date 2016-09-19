@@ -47,7 +47,8 @@ module.exports = function (app) {
                 var tstring = text.split('=')[1].match(/\d+/g);
                 var user = slacko.get_user_information(team_id, user_id);
                 var tmember = slacko.get_user_information_by_name(team_id, mname);
-
+                console.log("user: "+ user.name);
+                console.log("member: "+ tmember.name);
                 if (user != null & tmember != null) {
                     slacko.send_message("I will work on it, also i wil let you know once it will be done",user.name,team_id);
 
