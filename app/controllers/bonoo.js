@@ -5,8 +5,8 @@ var RtmClient = require('@slack/client').RtmClient;
 var CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS;
 var RTM_EVENTS = require('@slack/client').RTM_EVENTS;
 var MemoryDataStore = require('@slack/client').MemoryDataStore;
-
-var _rtms = {};
+global._rtms ={};
+var _rtms = global._rtms;
 
 var track_rtm = function (rtm, team_id) {
     _rtms[team_id] = rtm;
@@ -22,7 +22,7 @@ exports.connect = function (team, callback) {
         });
         track_rtm(rtm, team.id);
         rtm.start();
-       
+
 
         rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, function () {
             console.log('RTM client Connected');
