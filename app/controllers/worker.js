@@ -24,9 +24,11 @@ var do_work = function (task) {
         var lt = time + 2;
 
         ds.get_reminders(team.id, {status: "none", time: {$gt: gt, $lt: lt}}, function (err, array) {
+            console.log("reminders:" +array);
             if (array != null) {
                 for (c in array) {
                     var item = array[c];
+
                     slacko.connect(team, function () {
                         slacko.send_reminder_message("Hey " + item.name + "! could you please report your hours " +
                             "into time reporting tools. after it just simply send me message yes or no", team.id, item.channel);
@@ -56,7 +58,7 @@ var do_work = function (task) {
 var do_master_work = function () {
     //  console.log('worker');
     ds.get_all_teams(function (err, array) {
-        console.log("team" + array);
+      //  console.log("team" + array);
         if (err == null && array != null) {
             for (var t in array) {
                 var team = array[t];
