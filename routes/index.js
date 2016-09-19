@@ -1,6 +1,7 @@
 var Request = require('request')
+var worker = require('/app/controllers/worker');
 var ds = require('../data/ds');
-var SLACK_VER_TOKEN = "QC1xodgjZRUwlySDLnIxCm6F"
+var SLACK_VER_TOKEN = "QC1xodgjZRUwlySDLnIxCm6F";
 /* GET home page. */
 
 module.exports = function (app) {
@@ -168,7 +169,7 @@ module.exports = function (app) {
 
 
     // START existing bots
-
+/*
     var start_existing_bots = function () {
         ds.get_all_teams(function (list) {
             for (var t in list) {
@@ -184,6 +185,7 @@ module.exports = function (app) {
     }
 
     start_existing_bots();
-
+    */
+ worker.run();
 }
 
