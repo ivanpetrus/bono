@@ -1,18 +1,18 @@
 /**
  * Created by ivanpetrus on 9/13/16.
  */
-global._rtms ={};
+global._rtms = {};
 var _rtms = global._rtms;
 
-console.log("process: "+ process.pid)
+console.log("process: " + process.pid)
 
 var track_rtm = function (rtm, team_id) {
     _rtms[team_id] = rtm;
 }
 
 exports.connect = function (team, callback) {
-   // console.log("process: "+ process.pid)
-  //  console.log("rtm: "+team.id+" is: " +(_rtms[team.id] !=null));
+    // console.log("process: "+ process.pid)
+    //  console.log("rtm: "+team.id+" is: " +(_rtms[team.id] !=null));
     if (!_rtms[team.id]) {
         var RtmClient = require('@slack/client').RtmClient;
         var CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS;
@@ -32,11 +32,13 @@ exports.connect = function (team, callback) {
 
         rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, function () {
             console.log('RTM client Connected');
-            if (callback!=null){callback();}
+            if (callback != null) {
+                callback();
+            }
         });
 
         rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
-             rtm.send(message);
+            rtm.send(message);
         });
         rtm.on(RTM_EVENTS);
         rtm.on(RTM_EVENTS.BOT_ADDED, function () {
@@ -51,7 +53,9 @@ exports.connect = function (team, callback) {
             })
 
         })
-    }else if (callback!=null){callback();}
+    } else if (callback != null) {
+        callback();
+    }
 }
 exports.get_user_information = function (team_id, user_id) {
     var rtm = _rtms[team_id];
@@ -73,40 +77,42 @@ exports.get_channel = function (team_id, user_name) {
     }
 }
 
-exports.send_reminder_sucess_message = function (team_id, client_name, user_name ) {
+exports.send_reminder_sucess_message = function (team_id, client_name, user_name) {
     var rtm = _rtms[team_id];
     if (rtm) {
-        var channel = exports.get_channel(team_id,client_name);
+        var channel = exports.get_channel(team_id, client_name);
         rtm.sendMessage(client_name + "! I added reporting time for user " + user_name, channel.id);
     }
     else {
         console.error("could not find RTM for team: ", team_id);
     }
 }
-
 exports.send_error_message = function (team_id, user_name) {
     var rtm = _rtms[team_id];
     if (rtm != null) {
-        var channel = exports.get_channel(team_id,user_name);// rtm.dataStore.getDMByName(user_name)
+        var channel = exports.get_channel(team_id, user_name);// rtm.dataStore.getDMByName(user_name)
 
         rtm.sendMessage("Ooops something where wrong, I will send report to my creators", channel.id);
     }
 }
-
 exports.send_message = function (message, user_name, team_id) {
     var rtm = _rtms[team_id];
     if (rtm != null) {
-        var channel = exports.get_channel(team_id,user_name);
-        console.log("active channel: " +channel.id);
+        var channel = exports.get_channel(team_id, user_name);
+        console.log("active channel: " + channel.id);
         rtm.sendMessage(user_name + ", " + message, channel.id);
     }
 }
-exports.send_reminder_message = function (message,team_id, channel_id) {
+exports.send_reminder_message = function (message, team_id, channel_id) {
     var rtm = _rtms[team_id];
     if (rtm != null) {
-        rtm.sendMessage(message, channel_id,function (err) {
-            if (err){console.error(err);}
-            else {console.log("has been sent")}
+        rtm.sendMessage(message, channel_id, function (err) {
+            if (err) {
+                console.error(err);
+            }
+            else {
+                console.log("has been sent")
+            }
         });
     }
 }
